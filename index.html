@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="icon" type="image/png" href="assests/all-directions.png">    -->
+    <script src="https://kit.fontawesome.com/807d2e2951.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/assets/mapping.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="https://kit.fontawesome.com/807d2e2951.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>MoodParse</title>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- <button id="sign-up" class="sign-in" type="button">Sign Up</button> -->
+         <!-- <img id="gear" src="/assests/gear.svg" alt="Gear SVG"> -->
+        <div class="settings-block">
+            <i id="gear" class="bi bi-gear-fill"></i>
+            <div class="settings">
+                    <div class="theme-button-block">
+                        <div class="slider-cover"><img id="theme-icon" src="/assets/sun.png" alt="bright"></div>
+                        <div class="theme-icon">Light Theme</div>
+                        <div class="theme-icon">Dark Theme</div>                        
+                    </div>
+                    <div class="reset-button-block">
+                        <button id="reset" onclick="resetApp()" type="button">Fresh Start</button>
+                    </div>
+                    <div class="delete-account">
+                        <button id="delete-account" type="button">Delete Account</button>
+                    </div>
+            </div>
+        </div>
+
+    <div class="welcome-block"><p>Welcome</p><p id="logged-user">Guest</p></div>
+    <button id="login-button" type="button">Login</button>
+    <button id="logout-button" type="button">Logout</button>
+
+
+    <!-- ********************************************** REGISTRATION FORM MARKUP ************************************************************ -->
+
+   <div class="form-container">
+        <i id="close-form" class="fa-solid fa-square-xmark"></i>
+
+        <div class="form-block-div">
+            <h1 id="form-title">Welcome!</h1>
+
+            <form action="#" id="user-form">
+
+                <div class="form-block">
+                    <label for="user-name" id="name-label">Full Name</label>
+                    <div class="input-block">
+                        <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
+                        <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M702-494 575-622l42-42 85 85 170-170 42 43-212 212Zm-450-29q-42-42-42-108t42-108q42-42 108-42t108 42q42 42 42 108t-42 108q-42 42-108 42t-108-42ZM40-160v-94q0-35 17.5-63.5T108-360q75-33 133.5-46.5T360-420q60 0 118 13.5T611-360q33 15 51 43t18 63v94H40Zm60-60h520v-34q0-16-9-30.5T587-306q-71-33-120-43.5T360-360q-58 0-107.5 10.5T132-306q-15 7-23.5 21.5T100-254v34Zm324.5-346.5Q450-592 450-631t-25.5-64.5Q399-721 360-721t-64.5 25.5Q270-670 270-631t25.5 64.5Q321-541 360-541t64.5-25.5ZM360-290Zm0-341Z"/></svg></div>
+                        <input type="text" id="user-name" name="name">
+                        <i id="approved" class="fa-solid  fa-check-double"></i>
+                         <i id="declined" class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                </div>
+
+                   <div class="form-block">
+                    <label for="user-email" id="email-label">Email</label>
+                    <div class="input-block">
+                        <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
+                        <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M633-80 472-241l43-43 118 118 244-244 43 43L633-80ZM478-527l334-213H144l334 213Zm0 60L140-684v452h256l60 60H140q-24 0-42-18t-18-42v-508q0-24 18-42t42-18h677q24 0 42 18t18 42v244l-60 60v-248L478-467Zm1 9Zm-1-69Zm1 60Z"/></svg></div>
+                        <input type="email" id="user-email" name="email">
+                        <i id="e-approved" class="approved fa-solid fa-check-double"></i>
+                         <i id="e-declined" class="declined fa-solid fa-circle-xmark"></i>
+                    </div>
+                </div>
+
+                   <div class="form-block">
+                    <label for="pass-one" id="pass-one-label">Password</label>
+                    <div class="input-block">
+                        <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
+                        <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M80-200v-61h800v61H80Zm38-254-40-22 40-68H40v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 22-38-67-38 67Zm324 0-40-24 40-68h-78v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 24-38-67-38 67Zm324 0-40-24 40-68h-78v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 24-38-67-38 67Z"/></svg></div>
+                        <input type="password" id="pass-one" name="password-one">
+                        <div id="pass-one-guide">
+                            <p class="condition-one">Must have lowercase alphabets</p>
+                            <p class="condition-two">Must have uppercase alphabets</p>
+                            <p class="condition-three">Must have atleast one number</p>
+                            <p class="condition-four">Must be atleast 6 characters</p>
+                        </div>
+                        <i id="pOne-approved" class="approved fa-solid fa-check-double"></i>
+                        <i id="p-one-check" class="fa-regular fa-eye"></i>
+                        <i id="p-one-uncheck" class="fa-regular fa-eye-slash"></i>
+                    </div>
+                </div>
+
+                   <div class="form-block">
+                    <label for="pass-two" id="pass-two-label">Confirm Password</label>
+                    <div class="input-block">
+                        <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
+                        <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M151.76-454Q105-454 72.5-486.74 40-519.47 40-566.24 40-613 72.74-645.5q32.73-32.5 79.5-32.5 46.76 0 79.26 32.74 32.5 32.73 32.5 79.5 0 46.76-32.74 79.26-32.73 32.5-79.5 32.5ZM80-200v-60h800v60H80Zm320.5-287.38Q368-519.75 368-566q0-47.08 32.74-80.04Q433.47-679 480.24-679q46.76 0 79.26 32.96Q592-613.08 592-566q0 46.25-32.74 78.62Q526.53-455 479.76-455q-46.76 0-79.26-32.38Zm328 0Q696-519.75 696-566q0-47.08 32.74-80.04Q761.47-679 808.24-679q46.76 0 79.26 32.96Q920-613.08 920-566q0 46.25-32.74 78.62Q854.53-455 807.76-455q-46.76 0-79.26-32.38Z"/></svg></div>
+                        <input type="password" id="pass-two" name="password-two">
+                         <i id="pTwo-approved" class="approved fa-solid fa-check-double"></i>
+                        <i id="p-two-check" class="fa-regular fa-eye"></i>
+                        <i id="p-two-uncheck" class="fa-regular fa-eye-slash"></i>
+                    </div>
+                </div>
+
+
+                 <div class="form-block">
+                        <button id ="register-user" type="Submit">Register</button>
+                 </div>
+
+                 <div class="form-block">
+                        <div class="form-register-question">
+                            <p>Already Registered!</p> 
+                            <a id="register-question" href="#">LOGIN HERE</a>
+                        </div>
+                 </div>
+
+            </form>
+
+
+
+            <!-- ********************************** LOGIN FORM ************************************************* -->
+
+           
+
+            <form action="#" id="user-login-form">
+
+                
+
+                   <div class="form-block">
+                    <label for="user-login-email" id="email-login-label">Email</label>
+                    <div class="input-block">
+                        <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
+                        <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M633-80 472-241l43-43 118 118 244-244 43 43L633-80ZM478-527l334-213H144l334 213Zm0 60L140-684v452h256l60 60H140q-24 0-42-18t-18-42v-508q0-24 18-42t42-18h677q24 0 42 18t18 42v244l-60 60v-248L478-467Zm1 9Zm-1-69Zm1 60Z"/></svg></div>
+                        <input type="email" id="user-login-email">
+                    </div>
+                </div>
+
+                   <div class="form-block">
+                    <label for="user-login-pass" id="pass-login-label">Password</label>
+                    <div class="input-block">
+                        <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
+                        <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M80-200v-61h800v61H80Zm38-254-40-22 40-68H40v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 22-38-67-38 67Zm324 0-40-24 40-68h-78v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 24-38-67-38 67Zm324 0-40-24 40-68h-78v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 24-38-67-38 67Z"/></svg></div>
+                        <input type="password" id="user-login-pass">
+                    </div>
+                </div>
+
+                
+
+                 <div class="form-block">
+                        <button id ="login-user" type="Submit">Login</button>
+                 </div>
+
+                 <div class="form-block">
+                        <div class="form-login-question">
+                         <p>New User!</p> 
+                         <a id="login-question" href="#">REGISTER HERE</a></h3>
+                        </div>
+                 </div>
+
+            </form>
+
+            <!-- ************************************* END OF LOGIN FORM  **************************************** -->
+
+        </div>
+
+    </div>
+
+        <div class="past-entries-block">
+            <button type="button" id="new-entry-button">New Entry</button>
+            <div class="past-entries-select-block">
+                <!-- <label for="past-entries">Past Entries <button id="del-past-entry" type="button">Delete</button></label> -->
+                <label for="past-entries"><span id="numEntries"></span>&nbsp; - Past Entries</span> </label>
+                <select name="past-entries" id="past-entries">
+                    <option value="" hidden>Choose</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="current-cloud">
+
+        </div>
+
+       
+
+        <!-- <div class="entries-block">
+            
+        </div> -->
+
+        <div class="main-block">
+                <form action="#" id="extractor-form">
+                    <textarea name="entry" id="entry" placeholder="Type in an entry about you day, how you are feeling... This app will extract your attached emotions accurately and log them for you to analyze daily and over time..."></textarea>
+
+                    <button id ="submit-button" type="submit">Extract</button>
+                </form>
+        </div>
+
+        <div class="emotion-selected-block">
+            <div class="clicked-select-block">
+                <label id="selected-emo-name" for="clicked-emotion">Click an Emotion for its Entries</label>
+                <select name="clicked-emotion" id="clicked-emotion">
+                    <option value="" hidden>Choose</option>
+                </select>
+            </div>
+
+        </div>
+
+
+       
+        <div id="cloud">
+            <div id="entry-count"></div>
+        </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="node.js"></script>
+</body>
+</html>

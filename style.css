@@ -1,0 +1,896 @@
+@import url('https://fonts.googleapis.com/css2?family=Emblema+One&family=Foldit:wght@100..900&family=Rubik+Dirt&family=Rye&family=Saira:ital,wght@0,100..900;1,100..900&family=Stalinist+One&family=Train+One&family=Wallpoet&display=swap');
+:root{
+  --fs-blue: #0d6efd;  
+  --fs-red: #dc3545;
+  --fs-orange: #fd7e14;
+  --fs-yellow: #ffc107;
+  --fs-green: #198754;
+  --fs-gray: #6c757d;
+  
+
+  --bg-black: #000;
+  --bg-white: #fff;
+
+  --bg-dark: rgb(20, 20, 20);
+  --bg-light: rgb(235, 235, 235);
+
+  --bg: rgb(235, 235, 235);
+  --text: rgb(20, 20, 20);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* transition: all .5s ease-in-out; */
+}
+
+.main-container.dark{
+  --bg:rgb(20, 20, 20);
+  --text: rgb(235, 235, 235);
+
+}
+
+ button{
+    color: var(--text);
+ }
+
+.main-container{
+    background-color: var(--bg);
+    color: var(--text);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    font-family: "Saira", sans-serif;
+}
+
+#login-button{
+    position: absolute;
+    top: 1%;
+    right: 4%;
+    width: 7rem;
+    height: 2.5rem;
+    background-color: var(--fs-green);
+    font-weight: bolder;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#logout-button{
+    position: absolute;
+    top: 1%;
+    right: 4%;
+    width: 7rem;
+    height: 2.5rem;
+    background-color: var(--fs-red);
+    font-weight: bolder;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+
+.main-container .welcome-block{
+    position: absolute;
+    top: 1%;
+    right: 12%;
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--fs-blue);
+    justify-content: center;
+    align-items: center;
+    display: none;
+    background-color: var(--text);
+    color: var(--bg);
+
+    /* padding:1rem 0; */
+}
+
+.main-container .welcome-block p{
+    margin: 0;
+    padding: 0;
+    font-size: .6rem;
+    color: var(--bg);
+    font-weight: bolder;
+}
+
+#logged-user{
+    font-weight: bolder;
+    /* text-decoration: underline; */
+    font-style: italic;
+    font-size: .8rem;
+    color: var(--fs-blue);
+    /* cursor: pointer; */
+}
+
+/* ********************************** FORM CSS *********************************************** */
+.main-container .form-container{
+
+    width: 55%;
+    height: 80%;
+    top:50%;
+    left:50%;
+    /* border: 1px solid var(--text); */
+    transform: translate(-50%,-50%);
+    background-color: var(--bg);
+    /* background-color: transparent; */
+    opacity: 1;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    border-radius: 10px;
+    display: none;
+}
+
+#close-form{
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    cursor: pointer;
+}
+
+
+
+.main-container .form-container .form-block-div{
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--text);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.main-container .form-container .form-block-div #form-title{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+}
+
+/* ********************************** FORM MISC CSS ***************************************** */
+
+#name-info,#email-info{
+        position: absolute;
+        top:0;
+        left: 105%;
+        /* border: 1px solid red; */
+        background-color: var(--text);
+        color: var(--fs-green);
+        font-weight: bolder;
+        width: 70%;
+        height: 100%;
+        z-index: 90;
+        border-radius: 5px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 1rem;
+        font-size: .9rem;
+        font-weight: bolder;
+        display: none;
+}
+
+#approved,#e-approved{
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--fs-green);
+    font-weight: bolder;
+    display: none;
+}
+
+#declined,#e-declined{
+   position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--fs-red);
+    font-weight: bolder;
+    display: none;   
+}
+
+#pOne-approved,#pTwo-approved,#p-one-check,#p-two-check,#p-one-uncheck,#p-two-uncheck{
+  position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: bolder;
+    display: none; 
+    /* pointer-events: none; */
+}
+
+#pass-one-guide,#pass-two-guide{
+    position: absolute;
+    left: 105%;
+    top: 0;
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 1rem 2rem;
+    background-color: var(--text);
+    border: 4px solid var(--bg); 
+    color: var(--bg);
+    border-radius: 5px;
+    display: none;
+}
+#pass-one-guide p,#pass-two-guide p{
+    margin: .3rem 0;
+    transition: all .5s;
+}
+
+
+
+/* ************************** USER REGISTRATION FORM *************************** */
+#user-form{
+    /* border: 1px solid white; */
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 10;
+    padding: 2rem 4rem;
+    display: none;
+
+    transition: all 1s;
+}
+
+#user-form .form-block{
+    width: 100%;
+    height: 10%;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-form .form-block label, #user-form .form-block .input-block{
+    /* width: 50%; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    /* background-color: white; */
+}
+
+#user-form .form-block label{
+    width: 40%;
+    font-size: 1.2rem;
+    color: var(--text);
+}
+
+#user-form .form-block .input-block{
+    width: 60%;
+    position: relative;
+}
+
+.input-block .input-icon{
+    width: 10%;
+    height: 100%;
+    /* border: 1px solid black; */
+    /* padding: .5rem; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    padding: .6rem;
+    border-radius: 5px 0 0 5px;
+}
+/* .input-block .input-icon img{
+    object-fit: contain;
+    width: 60%;
+    height: 60%;
+    fill: black;
+} */
+
+.input-block input{
+    background-color: white;
+    width: 90%;
+    height: 100%;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: pointer;
+    padding: 0 .5rem;
+    font-size: 1rem;
+    border-radius:0 5px 5px 0;
+    
+    /* z-index: 100; */
+}
+
+#register-user{
+    width: 100%;
+    height: 100%;
+    background-color: var(--text);
+    border: none;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    color: var(--bg);
+    cursor: pointer;
+}
+
+.form-block .form-register-question{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 2rem;
+}
+
+.form-block .form-register-question a{
+    text-decoration: none;
+    /* position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%); */
+    color: var(--fs-red);
+    font-size: .8rem;
+    text-decoration: underline;
+}
+
+
+/* *************************************** USER LOGIN FORM *************************************** */
+
+#user-login-form{
+      width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 10;
+    padding: 2rem 8rem;
+    display: none;
+    /* border: 1px solid var(--text) */
+}
+
+#user-login-form .form-block{
+    width: 100%;
+    height: 10%;
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-direction: column; */
+}
+
+#user-login-form .form-block label, #user-login-form .form-block .input-block{
+    /* width: 50%; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid black; */
+    /* background-color: white; */
+}
+
+#user-login-form .form-block label{
+    width: 30%;
+    height: 100%;
+    /* background-color: red; */
+    font-size: 1.2rem;
+}
+
+#user-login-form .form-block .input-block{
+    width: 70%;
+    height: 100%;
+}
+
+#login-user{
+    width: 100%;
+    height: 100%;
+    background-color: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.form-block .form-login-question{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    align-items: center;
+    text-decoration: none;
+}
+
+
+.form-block .form-login-question a{
+    text-decoration: none;
+    /* position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%); */
+    color: var(--fs-red);
+    font-size: .8rem;
+    text-decoration: underline;
+}
+/* ********************************** END OF FORM CSS *********************************************** */
+
+/* ****************************************** SETTINGS **************************************************************** */
+.main-container .settings-block{
+    position: absolute;
+    right: 1%;
+    top: 1.5%;
+    /* background-color:red; */
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background-color: var(--bg);
+}
+
+#gear{
+    font-size: 2rem;  
+    cursor: pointer;
+    transition: all 1s;
+}
+
+#gear:active{
+    transform: scale(.5);
+    /* transform: rotate(45deg); */
+}
+
+.settings-block .settings{
+position: absolute;
+top: 120%;
+right: 0;
+width: 8rem;
+height: auto;
+/* background-color: red; */
+border: 1px solid var(--text);
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: center;
+/* display: none; */
+opacity: 0;
+display: none;
+padding:.5rem;
+border-radius: 5px;
+}
+
+.settings-block .settings > div{
+    margin: .2rem 0;
+}
+
+.settings-block .settings .theme-button-block{
+    /* position: absolute;
+    right: 13%;
+    top: 2%; */
+    border: 1px solid var(--text);
+    /* border-radius: 25px; */
+    height: 3rem;
+    width: 100%;
+    display:flex;
+    /* padding: .5rem; */
+    color: var(--text);
+     cursor: pointer;
+     padding: 0 .2rem;
+      position:relative;
+      border-radius: 5px;
+}
+
+.settings-block .settings .theme-button-block .theme-icon{
+    font-size: .7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+    color: var(--fs-blue);
+    font-weight: bolder;
+}
+.theme-button-block.slide .slider-cover{
+    transform: translateX(-100%);
+}
+ .theme-button-block .slider-cover{
+    width:50%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: var(--bg);   
+     transition: all .5s ease-in-out; 
+     position: absolute;
+     right:0;
+     top:0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.theme-button-block .slider-cover img{
+    width: 100%;
+    height: 100%;
+    padding: .7rem;
+    border-radius: 5px;
+    background-color: var(--fs-blue);
+    object-fit: contain;
+}
+
+.main-container .theme-button-block .theme-icon{    
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    color: var(--text);
+}
+
+.settings-block .settings .reset-button-block, .settings-block .settings .delete-account{
+    width: 100%;
+    height: 3rem;
+    border-radius: 5px;
+    /* background-color: red; */
+}
+
+
+
+
+#reset, #delete-account{
+    width: 100%;;
+    height: 100%;
+    box-shadow: none;
+    border-radius: 5px;
+    /* position: absolute; */
+    /* top: 2%; */
+    /* right: 17%; */
+    /* border-radius: 5px; */
+    font-size: .8rem;
+    background-color: var(--fs-blue);
+    border: none;
+    color: var(--bg-white);
+    cursor: pointer;
+}
+
+.main-container .past-entries-block{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 23%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 1rem;
+    /* background-color: var(--fs-orange); */
+}
+
+#new-entry-button{
+    width: 90%;
+    height: 10%;
+    border-radius: 5px;
+    background-color: var(--fs-green);
+    font-weight: var(--bg-white);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+
+.past-entries-select-block{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+    
+}
+.past-entries-select-block label, .past-entries-select-block select{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+}
+
+
+
+.past-entries-select-block label{
+    position: relative;
+}
+
+#del-past-entry{
+    position: absolute;
+    right: 0;
+    background-color: var(--fs-red);
+    border: none;
+    padding: .4rem .8rem;
+    font-weight: bolder;
+    color: var(--bg);
+    border-radius: 5px;
+}
+
+.past-entries-select-block select{
+    background-color: var(--fs-gray);
+    font-weight: bolder;
+    border-radius: 5px;
+}
+
+.past-entries-select-block select option{
+    font-weight: bolder;
+    font-size: .8rem;
+    border: 1px solid black;
+    color: var(--bg-white);
+    padding: .5rem 0 !important;
+    cursor: pointer;
+}
+
+.main-container .current-cloud{
+    position: absolute;
+    left: 0;
+    width: 23%;
+    height: 25%;
+    top: 35%;
+    padding: 1rem;
+    /* background-color: red; */
+}
+
+.main-container .main-block{
+    width: 60%;
+    height: 60%;
+    /* border: 2px solid var(--text); */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* padding: 0 5rem; */
+    font-size: 1.5rem;
+}
+
+#extractor-form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#entry{
+    resize: none;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: var(--bg);
+    color: var(--fs-green);
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+#extractor-form button{
+    width: 90%;
+    height: 3rem;
+    background-color: var(--fs-green);
+    border: none;
+    box-shadow: 2px 2px 1px var(--text);
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+.main-container .emotion-selected-block{
+    position: absolute;
+    right: 0;
+    top: 10%;
+    width: 23%;
+    height: 50%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    display: none;
+}
+
+.main-container .emotion-selected-block .clicked-select-block{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: yellow; */
+    padding: 0 1rem;
+}
+
+.clicked-select-block label, .clicked-select-block select{
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.clicked-select-block select{
+    background-color: var(--fs-gray);
+    font-weight: bolder;
+    /* border-radius: 5px; */
+}
+
+.clicked-select-block select option{
+    font-weight: bolder;
+    color: var(--bg-white);
+}
+
+
+
+
+
+
+.main-container #cloud{
+    width: 100%;
+    min-height: 40%;
+    border-top: 1px solid var(--text);
+    /* background-color: var(--fs-blue); */
+    padding: 1rem;
+    padding-top: 3rem;
+    position: relative;
+    overflow-y: auto;
+}
+
+#entry-count{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 10%;
+    /* border: 1px solid black; */
+    background-color: var(--fs-blue);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 5px;
+    color: var(--text);
+    font-weight: bolder;
+    /* margin-bottom: 1rem; */
+}
+
+.emotion-item{
+    border: 1px solid var(--text);
+    color: var(--text);
+    padding: .2rem;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    margin: .2rem;
+    display: inline-flex;
+    border-radius: 10px;
+    flex-shrink: 0;
+    font-weight: bolder;
+    cursor: pointer;
+    /* animation: flash 1s ease-in-out 10 none; */
+    /* color: red; */
+}
+
+.emotion-item .emo-text{
+    width: auto;
+    height: auto;
+    /* background-color: red; */
+    display: inline-flex;
+    padding:.7rem;
+    border-right: 1px solid var(--text);
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    white-space: nowrap;
+    /* padding: 0 .2rem; */
+    /* background-color: red; */
+}
+
+.emotion-item .emo-count{
+    width: auto;
+    height: 100%;
+    /* background-color: blue; */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: .7rem;
+}
+
+.current-emos{
+    border: 1px solid var(--text);
+    padding: .5rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: .2rem
+}
+
+.settings.open{
+    opacity: 1;
+    display: flex;
+}
+
+.settings.close{
+    opacity: 0;
+    display: none;
+}
+
+.form-container.open{
+    opacity: 1;
+    display: flex;
+}
+
+.form-container.close{
+    opacity: 0;
+    display: none;
+}
+
+@keyframes flash{
+    0%{
+        outline: 2px solid #198754;
+    }
+
+    20%{
+        outline: 2px solid #dc3545;
+    }
+
+    40%{
+        outline: 2px solid #198754;
+    }
+
+    60%{
+        outline: 2px solid #dc3545;
+    }
+
+    80%{
+        outline: 2px solid #198754;
+    }
+
+    100%{
+        outline: 2px solid #dc3545;
+    }
+    
+}
