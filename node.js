@@ -1149,12 +1149,12 @@ themeButton.addEventListener("click",()=>{
     themeButton.classList.toggle("slide");
     mainContainer.classList.toggle("dark");
     if (themeIcon.src.includes("sun.png")) {
-    themeIcon.src = "/assets/moon.png";
+    themeIcon.src = "./assets/moon.png";
     localStorage.setItem("theme", "light");
 
   } else {
     localStorage.setItem("theme", "dark");
-    themeIcon.src = "/assets/sun.png";
+    themeIcon.src = "./assets/sun.png";
   }
 })
 
