@@ -1558,7 +1558,9 @@ function renderEmotions(x) {
 
 // // *************************************** RESET FUNCTION *************************************
 
-async function resetApp() {
+// async function resetApp() {
+window.resetApp = async function () {
+  const { data: { user },} = await supabaseClient.auth.getUser();
 
   const confirmed = confirm(
     "Delete ALL entries and emotions from database?"
@@ -1570,7 +1572,7 @@ async function resetApp() {
   const { error: emotionsError } = await supabaseClient
     .from("entry_emotions")
     .delete()
-    .neq("id", 0);
+    .eq("user_id", user.id);
 
   if (emotionsError) {
     console.error(emotionsError);
@@ -1581,7 +1583,7 @@ async function resetApp() {
   const { error: entriesError } = await supabaseClient
     .from("entries")
     .delete()
-    .neq("id", 0);
+    .eq("user_id", user.id);;
 
   if (entriesError) {
     console.error(entriesError);
