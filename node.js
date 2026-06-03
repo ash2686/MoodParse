@@ -59,16 +59,16 @@ registerBtn.disabled = true;
 
 
 
-supabaseClient.auth.onAuthStateChange((event, session) => {
-  console.log("EVENT:", event);
-  console.log("SESSION:", session);
+// supabaseClient.auth.onAuthStateChange((event, session) => {
+//   // console.log("EVENT:", event);
+//   // console.log("SESSION:", session);
 
-  if (event === "PASSWORD_RECOVERY") {
-    sessionStorage.setItem("passwordRecovery", "true");
-  }
-});
+//   if (event === "PASSWORD_RECOVERY") {
+//     sessionStorage.setItem("passwordRecovery", "true");
+//   }
+// });
 
-console.log("Windows href is - ",window.location.href);
+// console.log("Windows href is - ",window.location.href);
 
 forgotLink.addEventListener("click", async () => {
   // loginForm.style.display = "none";
@@ -1627,7 +1627,7 @@ function addToSelect() {
   //  console.log("Select Bulider created at - ", entry.createdAt);
    let localTime = UTC2Local(entry.createdAt);
 
-   console.log(localTime);
+  //  console.log(localTime);
     
 
     let [yy,mm,dd] = entry.createdAt.split("T")[0].split("-");
@@ -1741,6 +1741,8 @@ function activateCloud(x) {
       let emotionSpan = div.querySelector(".emo-text");
       let clickedEmotion = emotionSpan.textContent;
 
+       console.log("This is in activate cloud - ",entries);
+
       entries.forEach((entry, index) => {
         if (entry["emotions"].includes(clickedEmotion)) {
           // console.log("Entry FOund!");
@@ -1802,14 +1804,15 @@ function renderSelectForEmotion(clickedEmotion, foundEntries) {
 
 clickedEmotionSelect.addEventListener("change",(e)=>{
   let ctx = e.target.value;
+  console.log("CTX", ctx);
   submitBtn.disabled = true;
   submitBtn.style.backgroundColor = "grey";
   submitBtn.textContent = "Extract(disabled)"
-
   entries.forEach(entry=>{
 
-       
+       if(entry.createdAt === ctx){
        userInput.value = entry["text"];
+       }
        
   })
 })

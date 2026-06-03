@@ -939,7 +939,7 @@ border-radius: 5px;
     height: auto;
     /* background-color: red; */
     display: inline-flex;
-    padding:.7rem;
+    padding:.5rem;
     border-right: 1px solid var(--text);
     justify-content: center;
     align-items: center;
@@ -956,7 +956,7 @@ border-radius: 5px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: .7rem;
+    padding: .5rem;
 }
 
 .current-emos{
