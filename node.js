@@ -14,6 +14,7 @@ let currentCloud = document.querySelector(".current-cloud");
 let numberOfEntriesBlock = document.getElementById("entry-count");
 let pastEntries = document.querySelector("#past-entries");
 let pastEntryCount = document.getElementById("numEntries");
+let delButton;
 let newEntryButton = document.getElementById("new-entry-button");
 let userInput = document.querySelector("#entry");
 let clickedEmotionSelect = document.querySelector("#clicked-emotion");
@@ -73,7 +74,7 @@ forgotLink.addEventListener("click", async () => {
   // loginForm.style.display = "none";
   //  resetForm.style.display = "flex";
 
-   formTitle.textContent = "Reset Password"
+   formTitle.textContent = "Reset Password";
 
     const email = prompt("Enter your email address");
 
@@ -97,6 +98,7 @@ forgotLink.addEventListener("click", async () => {
   backToLoginButton.addEventListener("click",()=>{
     resetForm.style.display = "none";
     loginForm.style.display = "flex";
+    formTitle.textContent = "Login";
   })
 
 
@@ -986,6 +988,10 @@ loginUserButton.addEventListener("click", async (e) => {
   const email = document.getElementById("user-login-email").value;
   const password = document.getElementById("user-login-pass").value;
 
+  const rememberMe = document.getElementById("remember-me").checked;
+
+  localStorage.setItem("rememberMe", rememberMe);
+
   const { data, error } =
     await supabaseClient.auth.signInWithPassword({
       email,
@@ -1102,6 +1108,7 @@ loginButton.onclick = ()=>{
    loginForm.style.display="flex";
    registerForm.style.display ="none";
    resetForm.style.display="none";
+   formTitle.textContent = "Login";
 
    
 }
@@ -1232,7 +1239,10 @@ newEntryButton.onclick = ()=>{
   pastEntries.value ="";
   clickedEmotionSelect.value="";
   selectedEmotionBlock.style.display = "none";
-
+  submitBtn.disabled = false;
+  submitBtn.style.backgroundColor = "#198754";
+  submitBtn.textContent = "Extract"
+  delButton.style.display = "none";
   renderEmotions(emotionsPool);
 
 }
@@ -1242,15 +1252,15 @@ newEntryButton.onclick = ()=>{
 //******************************************* WINDOWS ON LOAD *********************************************
 window.onload = async () => { 
 
-const recoveryMode = sessionStorage.getItem("passwordRecovery");
 
-  if (recoveryMode === "true") {
-    formContainer.style.display = "flex";
-    formBlockDiv.style.display = "flex";
-    loginForm.style.display = "none";
-    resetForm.style.display = "flex";
-    formTitle.textContent = "Reset Password";
-  }
+if (window.location.href.includes("type=recovery")) {
+  formContainer.style.display = "flex";
+  formBlockDiv.style.display = "flex";
+  loginForm.style.display = "none";
+  resetForm.style.display = "flex";
+  formTitle.textContent = "Reset Password";
+  return;
+}
   
 const { data: { session },} = await supabaseClient.auth.getSession();
 
@@ -1269,6 +1279,12 @@ if (session) {
   userInput.placeholder = `Welcome! Please create an account and/or login to start. Enter your daily moods or how you'are feeling, this App will extract accurate emotions and log them for you to assess daily and over time.  `;
 }
 
+const rememberMe = localStorage.getItem("rememberMe") === "true";
+
+if(session && !rememberMe) {
+  await supabaseClient.auth.signOut();
+}
+
 
 const user = session?.user;
 
@@ -1285,22 +1301,11 @@ if (user) {
   // console.log(data?.display_name);
 }
 
-// const { data: { user } } = await supabaseClient.auth.getUser();
-// document.getElementsByClassName("welcome-block")[0].style.display = "flex";
-//  console.log("New User value is - ",newUser);
-//  console.log(user)
-// if(user && newUser){
-// await supabaseClient.from("profiles").insert({
-//   id: user.id,
-//   display_name: newUser,
-// });
-//   document.getElementById("logged-user").textContent = newUser ? newUser : "Guest";
-// } 
+
 
   entries = await entriesDB();
   emotionsPool = entries.flatMap(e => e.emotions);
 
-  // console.log("Windows Loaded!")
   numberOfEntriesBlock.innerHTML = "";
   let stats = uniqueEmoCount();
   let newP1 = document.createElement("p");
@@ -1656,16 +1661,22 @@ pastEntries.addEventListener("change", (e) => {
   console.log(entries[0])
   let delEntry = entries.filter(x=>x.createdAt === entry);
 
-  // console.log("deleted to item",delEntry[0]);
 
-  // console.log("Deleted entry info", delEntry[0].id);
-  let delButton = document.createElement("button");
+  submitBtn.disabled = true;
+  submitBtn.style.backgroundColor = "grey";
+  submitBtn.textContent = "Extract(disabled)"
+
+ 
+  delButton = document.createElement("button");
   delButton.id = "del-past-entry";
   delButton.type = "button";
   delButton.textContent = "Delete";
   pastLabel.appendChild(delButton);
 
-  delButton.addEventListener("click",()=>{delPastEntry(delEntry[0].id)})
+  delButton.addEventListener("click",()=>{
+    delPastEntry(delEntry[0].id);
+  })
+
   entries.forEach((item) => {
     if (item["createdAt"]===entry) {
       document.getElementById("entry").value = item.text;
@@ -1690,6 +1701,9 @@ async function delPastEntry(id){
   if(!res){
     return;
   }
+  delButton.style.display = "none";
+
+  
   await supabaseClient.from("entries").delete().eq("id", id);
 
   const { data: { user }, } = await supabaseClient.auth.getUser();
@@ -1714,7 +1728,7 @@ async function delPastEntry(id){
     renderEmotions(emotionsPool);
     addToSelect();   
     alert("Entry Deleted!"); 
-  }
+}
 
 
 function getCloudDivs(){
@@ -1796,7 +1810,9 @@ function renderSelectForEmotion(clickedEmotion, foundEntries) {
 
 clickedEmotionSelect.addEventListener("change",(e)=>{
   let ctx = e.target.value;
-  // console.log("Ctx is - ",ctx);
+  submitBtn.disabled = true;
+  submitBtn.style.backgroundColor = "grey";
+  submitBtn.textContent = "Extract(disabled)"
 
   entries.forEach(entry=>{
 

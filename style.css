@@ -409,6 +409,31 @@
     /* flex-direction: column; */
 }
 
+.form-block .remember-block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+    width: 50%;
+    height: 100%;
+    font-size: .8rem;
+}
+
+.form-block .remember-block label{
+    font-size: 1rem !important;
+    /* background-color: red; */
+    width: 40% !important;
+}
+
+#user-login-form .form-block #forgot-password{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+}
+
 #user-login-form .form-block label, #user-login-form .form-block .input-block{
     /* width: 50%; */
     height: 100%;
