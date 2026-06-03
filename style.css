@@ -409,20 +409,19 @@
     /* flex-direction: column; */
 }
 
-.form-block .remember-block{
+#user-login-form .form-block .remember-block{
     display: flex;
     justify-content: center;
     align-items: center;
     /* background-color: red; */
     width: 50%;
     height: 100%;
-    font-size: .8rem;
 }
 
-.form-block .remember-block label{
-    font-size: 1rem !important;
+#user-login-form .form-block .remember-block label{
+    font-size: 1rem;
     /* background-color: red; */
-    width: 40% !important;
+    width: 50%;
 }
 
 #user-login-form .form-block #forgot-password{
