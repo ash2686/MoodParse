@@ -995,9 +995,7 @@ loginUserButton.addEventListener("click", async (e) => {
   const { data, error } =
     await supabaseClient.auth.signInWithPassword({
       email,
-      password,  options: {
-    emailRedirectTo: "http://localhost:5501"
-  }
+      password
     });
 
   if (error) {
