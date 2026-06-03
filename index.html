@@ -139,10 +139,14 @@
                         <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
                         <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M80-200v-61h800v61H80Zm38-254-40-22 40-68H40v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 22-38-67-38 67Zm324 0-40-24 40-68h-78v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 24-38-67-38 67Zm324 0-40-24 40-68h-78v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 24-38-67-38 67Z"/></svg></div>
                         <input type="password" id="user-login-pass">
+                         <i id="login-pass-check" class="fa-regular fa-eye"></i>
+                        <i id="login-pass-uncheck" class="fa-regular fa-eye-slash"></i>
                     </div>
                 </div>
 
-                
+                <div class="form-block">
+                    <a href="#" id="forgot-password">Forgot Password?</a>
+                </div>
 
                  <div class="form-block">
                         <button id ="login-user" type="Submit">Login</button>
@@ -158,6 +162,51 @@
             </form>
 
             <!-- ************************************* END OF LOGIN FORM  **************************************** -->
+
+
+            <!-- *************************************** RESET FORM *************************************************** -->
+            <form id="reset-form">            
+                  <div class="form-block">
+                    <label for="reset-one" id="reset-one-label">Password</label>
+                    <div class="input-block">
+                        <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
+                        <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M80-200v-61h800v61H80Zm38-254-40-22 40-68H40v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 22-38-67-38 67Zm324 0-40-24 40-68h-78v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 24-38-67-38 67Zm324 0-40-24 40-68h-78v-45h78l-40-68 40-22 38 67 38-67 40 22-40 68h78v45h-78l40 68-40 24-38-67-38 67Z"/></svg></div>
+                        <input type="password" id="reset-one" name="reset-one">
+                        <div id="reset-one-guide">
+                            <p class="reset-condition-one">Must have lowercase alphabets</p>
+                            <p class="reset-condition-two">Must have uppercase alphabets</p>
+                            <p class="reset-condition-three">Must have atleast one number</p>
+                            <p class="reset-condition-four">Must be atleast 6 characters</p>
+                        </div>
+                        <i id="reset-one-approved" class="approved fa-solid fa-check-double"></i>
+                        <i id="reset-one-check" class="fa-regular fa-eye"></i>
+                        <i id="reset-one-uncheck" class="fa-regular fa-eye-slash"></i>
+                    </div>
+                </div>
+
+                   <div class="form-block">
+                    <label for="reset-two" id="reset-two-label">Confirm Password</label>
+                    <div class="input-block">
+                        <!-- <div class="input-icon"><img src="/assets/person.svg" alt="person"></div> -->
+                        <div class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#000000"><path d="M151.76-454Q105-454 72.5-486.74 40-519.47 40-566.24 40-613 72.74-645.5q32.73-32.5 79.5-32.5 46.76 0 79.26 32.74 32.5 32.73 32.5 79.5 0 46.76-32.74 79.26-32.73 32.5-79.5 32.5ZM80-200v-60h800v60H80Zm320.5-287.38Q368-519.75 368-566q0-47.08 32.74-80.04Q433.47-679 480.24-679q46.76 0 79.26 32.96Q592-613.08 592-566q0 46.25-32.74 78.62Q526.53-455 479.76-455q-46.76 0-79.26-32.38Zm328 0Q696-519.75 696-566q0-47.08 32.74-80.04Q761.47-679 808.24-679q46.76 0 79.26 32.96Q920-613.08 920-566q0 46.25-32.74 78.62Q854.53-455 807.76-455q-46.76 0-79.26-32.38Z"/></svg></div>
+                        <input type="password" id="reset-two" name="reset-two">
+                         <i id="reset-two-approved" class="approved fa-solid fa-check-double"></i>
+                        <i id="reset-two-check" class="fa-regular fa-eye"></i>
+                        <i id="reset-two-uncheck" class="fa-regular fa-eye-slash"></i>
+                    </div>
+                </div>
+            
+                <div class="form-block">
+                <button type="submit"  id="resetBtn">Reset Password</button>
+                </div>
+
+                <div class="form-block">
+                <button type="button"  id="back-to-login">Back to Login</button>
+                </div>
+            </form>
+
+
+            <!-- *************************************** END OF RESET FORM *************************************************** -->
 
         </div>
 
@@ -187,7 +236,7 @@
 
         <div class="main-block">
                 <form action="#" id="extractor-form">
-                    <textarea name="entry" id="entry" placeholder="Type in an entry about you day, how you are feeling... This app will extract your attached emotions accurately and log them for you to analyze daily and over time..."></textarea>
+                    <textarea name="entry" id="entry" placeholder="Type in an entry about your day, how you are feeling... This app will extract your attached emotions accurately and log them for you to analyze daily and over time..."></textarea>
 
                     <button id ="submit-button" type="submit">Extract</button>
                 </form>

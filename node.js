@@ -5,15 +5,6 @@ const supabaseClient = supabase.createClient(
   "sb_publishable_GelgjOJz4pQgtvN3Ki7IgA_SkFIaqyt"
 );
 
-// async function testConnection() {
-//   const { data, error } = await supabaseClient.from("entries").select("*");
-
-//   console.log("DATA:", data);
-//   console.log("ERROR:", error);
-// }
-
-// testConnection();
-
 
 let themeButton = document.querySelector(".theme-button-block");
 let mainContainer = document.querySelector(".main-container");
@@ -37,6 +28,7 @@ const savedTheme = localStorage.getItem("theme");
 let uniqueEmotionsCount;
 let cloudDivs;
 
+
 //************************************** FORM LOGIC **********************************************
 let loginButton = document.getElementById("login-button");
 let logoutButton = document.getElementById("logout-button");
@@ -55,8 +47,386 @@ let formBlockDiv = document.querySelector(".form-block-div");
 let registerBtn = document.getElementById("register-user");
 let loginBtn = document.getElementById("login-user");
 
+let resetForm = document.getElementById("reset-form");
+let forgotLink = document.getElementById("forgot-password");
+let backToLoginButton = document.getElementById("back-to-login");
+
 registerBtn.disabled = true;
 // loginBtn.disabled = true;
+
+// *********************************** RESET FORN***************************************************
+
+
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  console.log("EVENT:", event);
+  console.log("SESSION:", session);
+
+  if (event === "PASSWORD_RECOVERY") {
+    sessionStorage.setItem("passwordRecovery", "true");
+  }
+});
+
+console.log("Windows href is - ",window.location.href);
+
+forgotLink.addEventListener("click", async () => {
+  // loginForm.style.display = "none";
+  //  resetForm.style.display = "flex";
+
+   formTitle.textContent = "Reset Password"
+
+    const email = prompt("Enter your email address");
+
+    if (!email) return;
+
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(
+      email,
+      {
+         redirectTo: "http://127.0.0.1:5501/index.html"
+      }
+    );
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    alert("Password reset email sent!");
+  });
+
+  backToLoginButton.addEventListener("click",()=>{
+    resetForm.style.display = "none";
+    loginForm.style.display = "flex";
+  })
+
+
+// window.addEventListener("load", () => {
+
+// });
+
+
+//  ************************** Reset Passwrod One *************************************
+
+let resetPasswordOne, resetPasswordTwo;
+let resetPassOne = document.getElementById("reset-one");
+let resetPassTwo = document.getElementById("reset-two");
+
+resetPassTwo.disabled = true;
+let resetOneBlock = resetPassOne.parentElement;
+
+let resetOneCheck = document.getElementById("reset-one-check");
+let resetOneUncheck = document.getElementById("reset-one-uncheck");
+let resetOneGuide = document.getElementById("reset-one-guide");
+
+let ResetCheckOne = false;
+let ResetCheckTwo = false;
+let ResetCheckThree = false;
+let ResetCheckFour = false;
+
+resetPassOne.addEventListener("focus",(e)=>{
+   resetPasswordOne = e.target.value;
+  // console.log("FOCUS EVENT IS FIRED!");
+  if(resetPasswordOne.trim().length>0){
+   resetOneGuide.style.display = "flex";
+   resetOneCheck.style.display = "none";
+   resetOneUncheck.style.display = "block";
+   resetPassOne.type ="password";
+}else{
+   resetOneGuide.style.display = "none";
+   resetOneCheck.style.display = "none";
+   resetOneUncheck.style.display ="none";
+   resetOneBlock.style.outline = "none"
+}
+})
+
+resetPassOne.addEventListener("input",(e)=>{
+
+    // console.log(e.target.value);
+    resetPasswordOne = e.target.value;
+    
+    if(resetPasswordOne.trim().length>0){
+    resetOneUncheck.style.display ="block";
+    resetOneGuide.style.display = "flex";
+    }else{
+      resetOneBlock.style.outline = "none";
+    }
+
+    if(/[a-z]/.test(resetPasswordOne)){      
+        document.querySelector(".reset-condition-one").style.color = "green";
+        ResetCheckOne = true;
+        
+    }else{
+        document.querySelector(".reset-condition-one").style.color = "red";
+        ResetCheckOne = false;
+    }
+
+     if(/[A-Z]/.test(resetPasswordOne)){
+        document.querySelector(".reset-condition-two").style.color = "green";
+        ResetCheckTwo = true;
+     }else{
+        document.querySelector(".reset-condition-two").style.color = "red";
+        ResetCheckTwo = false;
+    }
+
+      if(/[0-9]/.test(resetPasswordOne)){
+        document.querySelector(".reset-condition-three").style.color = "green";
+        ResetCheckThree = true;
+     }else{
+        document.querySelector(".reset-condition-three").style.color = "red";
+        ResetCheckThree = false;
+    }
+
+     if(resetPasswordOne.length >= 6){
+        document.querySelector(".reset-condition-four").style.color = "green";
+        ResetCheckFour = true;
+     }else{
+        document.querySelector(".reset-condition-four").style.color = "red";
+        ResetCheckFour =false;
+    }    
+
+       if(ResetCheckOne && ResetCheckTwo && ResetCheckThree && ResetCheckFour){
+      
+        resetPassTwo.disabled = false;
+        resetOneBlock.style.outline = "4px solid green"
+       }else{
+        resetOneBlock.style.outline = "4px solid red";
+        resetPassTwo.disabled = true;
+        e.preventDefault();
+       }
+
+})
+
+resetPassOne.addEventListener("keydown", (e) => {
+  if (e.key === "Backspace" || e.key === "Delete") {
+       resetPasswordOne = e.target.value;
+  }
+    
+    if(resetPasswordOne.trim().length>0){
+    resetOneUncheck.style.display ="block";
+    resetOneGuide.style.display = "flex";
+    }else{
+      resetOneBlock.style.outline = "none";
+    }
+
+    if(/[a-z]/.test(resetPasswordOne)){      
+        document.querySelector(".reset-condition-one").style.color = "green";
+        ResetCheckOne = true;
+        
+    }else{
+        document.querySelector(".reset-condition-one").style.color = "red";
+        ResetCheckOne = false;
+    }
+
+     if(/[A-Z]/.test(resetPasswordOne)){
+        document.querySelector(".reset-condition-two").style.color = "green";
+        ResetCheckTwo = true;
+     }else{
+        document.querySelector(".reset-condition-two").style.color = "red";
+        ResetCheckTwo = false;
+    }
+
+      if(/[0-9]/.test(resetPasswordOne)){
+        document.querySelector(".reset-condition-three").style.color = "green";
+        ResetCheckThree = true;
+     }else{
+        document.querySelector(".reset-condition-three").style.color = "red";
+        ResetCheckThree = false;
+    }
+
+     if(resetPasswordOne.length >= 6){
+        document.querySelector(".reset-condition-four").style.color = "green";
+        ResetCheckFour = true;
+     }else{
+        document.querySelector(".reset-condition-four").style.color = "red";
+        ResetCheckFour =false;
+    }    
+
+       if(ResetCheckOne && ResetCheckTwo && ResetCheckThree && ResetCheckFour){
+      
+        resetPassTwo.disabled = false;
+        resetOneBlock.style.outline = "4px solid green"
+       }else{
+        resetOneBlock.style.outline = "4px solid red";
+        resetPassTwo.disabled = true;
+        // e.preventDefault();
+       }
+});
+
+resetPassOne.addEventListener("change",(e)=>{
+ resetPasswordOne = e.target.value;
+
+  if(resetPasswordOne.trim().length>0){
+    resetOneUncheck.style.display ="block";
+    resetOneGuide.style.display = "flex";
+    }else{
+      resetOneBlock.style.outline = "none";
+    }
+
+if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(resetPasswordOne)) || !(resetPasswordOne.length>=6)){
+        resetOneBlock.style.outline = "4px solid red";       
+    }else{
+        resetOneBlock.style.outline = "4px solid green";     
+    }
+
+//  passOneBlock.style.outline = "none";
+ resetOneGuide.style.display= "none";
+ resetOneUncheck.style.display = "block";
+});
+
+resetOneUncheck.addEventListener("click",()=>{
+      if(resetPassOne.type === "password"){
+        resetPassOne.type = "text";
+        resetOneUncheck.style.display = "none";
+    resetOneCheck.style.display = "block";
+    
+    }else{
+        resetPassOne.type = "password";
+        resetOneUncheck.style.display = "block";
+    resetOneCheck.style.display = "none";
+    }
+});
+
+resetOneCheck.addEventListener("click",()=>{
+    if(resetOne.type === "text"){
+        resetOne.type = "password";
+        resetOneUncheck.style.display = "block";
+         resetOneCheck.style.display ="none";
+         
+    }else{
+        resetOne.type = "text";
+        resetOneUncheck.style.display = "none";
+    resetOneCheck.style.display = "block";
+    resetOneCheck.style.color ="black";
+    }
+})
+
+// **************************************** Reset Password 2 *******************************************
+
+let resetTwoBlock = resetPassTwo.parentElement;
+
+let resetTwoCheck = document.getElementById("reset-two-check");
+let resetTwoUncheck = document.getElementById("reset-two-uncheck");
+
+
+
+resetPassTwo.addEventListener("input",(e)=>{
+  resetTwoUncheck.style.display ="block";
+})
+
+
+resetPassTwo.addEventListener("change", (e) => {
+  resetPasswordTwo = e.target.value;
+  resetTwoUncheck.style.display = "block";
+
+  if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(resetPasswordTwo)) || !(resetPasswordTwo.length>=6)){
+        resetTwoBlock.style.outline = "4px solid red";
+        //  passOneGuide.style.outline = "4px solid red";
+        //  passOneValid = false;
+    }
+});
+
+resetPassTwo.addEventListener("blur",(e)=>{
+  //  passOneGuide.style.display = "none";
+  resetTwoUncheck.style.display = "block";
+  resetTwoCheck.style.display = "none";
+   resetPassTwo.type ="password";
+})
+
+resetPassTwo.addEventListener("focus",(e)=>{
+   resetPasswordTwo = e.target.value;
+
+   if(resetPasswordTwo.trim().length>0){
+  resetTwoCheck.style.display = "none";
+  resetTwoUncheck.style.display = "block";
+   resetPassTwo.type ="password";
+}else{
+  resetTwoCheck.style.display = "none";
+  resetTwoUncheck.style.display = "none"
+}
+})
+
+
+resetTwoUncheck.addEventListener("click",()=>{
+   
+    if(resetPassTwo.type === "password"){
+        resetPassTwo.type = "text";
+         resetTwoUncheck.style.display = "none";
+         resetTwoCheck.style.display = "block";
+    }else{
+        
+      resetPassTwo.type = "password";
+        resetTwoUncheck.style.display = "block";
+        resetTwoCheck.style.display = "none";
+    }
+});
+
+resetTwoCheck.addEventListener("click",()=>{
+    if(resetPassTwo.type === "text"){
+        resetPassTwo.type = "password";
+        resetTwoUncheck.style.display = "block";
+        resetTwoCheck.style.display ="none";
+    }else{
+        resetPassTwo.type = "text";
+         resetTwoUncheck.style.display = "none";
+         resetTwoCheck.style.display = "block";
+         resetTwoCheck.style.color ="black";
+    }
+})
+
+
+
+
+//  ********************************* RESET FORM SUBMIT **************************************
+
+
+resetForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  // let newPass = document.getElementById("new-pass").value;
+  // let confirmPass = document.getElementById("confirm-pass").value;
+ console.log("reset fom clicked")
+  let newPass = resetPasswordOne;
+  let confirmPass = resetPasswordTwo;
+
+  console.log(newPass);
+  console.log(confirmPass);   
+
+  // if (!newPass.trim() && !confirmPass.trim() &&  newPass.trim() === newPass.trim() &&  newPass.trim().length >= 6 && confirmPass.trim().length >= 6){
+   if(newPass === confirmPass){
+            const newPassword = newPass;
+
+            const {
+              data: { session },
+              error: sessionError,
+            } = await supabaseClient.auth.getSession();
+
+            console.log("Session:", session);
+            console.log("Session Error:", sessionError);
+
+           const { error } = await supabaseClient.auth.updateUser({
+            password: newPassword,
+            });
+
+                if (error) {
+                  alert(error.message);
+                } else {
+                  alert("Password updated successfully");
+                }
+
+                sessionStorage.removeItem("passwordRecovery");
+  } else {
+    
+    alert("something went wrong, try again");
+  }
+
+  resetForm.style.display = "none";
+  loginForm.style.display = "flex";
+});
+
+
+
+
+
+
 
 // ******************************* REGISTRATION FORM VALIDATION *******************************************
 
@@ -555,7 +925,58 @@ window.location.reload();
 
 // let newUser = localStorage.getItem('username') || "";
 
-// *********************************************** LOGIN FORM ******************************************************
+
+
+
+// *********************************************** LOGIN FORM VALIDATION ************************************************
+
+
+
+let loginInput = document.getElementById("user-login-pass");
+let loginPassCheck = document.getElementById("login-pass-check");
+let loginPassUncheck = document.getElementById("login-pass-uncheck");
+
+loginInput.addEventListener("focus",(e)=>{
+    let pass = e.target.value;
+
+    if(pass.trim().length>0){
+          loginPassUncheck.style.display = "block";
+    }
+})
+
+loginInput.addEventListener("input",(e)=>{
+        let pass = e.target.value;
+
+         if(pass.trim().length>0){
+          loginPassUncheck.style.display = "block";
+    }else{
+      loginPassUncheck.style.display = "none";
+    }
+
+})
+
+loginPassUncheck.addEventListener("click",()=>{
+     loginPassUncheck.style.display = "none";
+     loginPassCheck.style.display = "block";
+     if(loginInput.type === "password"){
+         loginInput.type = "text";
+     }else{
+       loginInput.type = "password";
+     }
+})
+
+loginPassCheck.addEventListener("click",()=>{
+     loginPassUncheck.style.display = "block";
+     loginPassCheck.style.display = "none";
+     if(loginInput.type === "text"){
+         loginInput.type = "password";
+     }else{
+       loginInput.type = "text";
+     }
+})
+
+
+// *********************************************** LOGIN FORM SUBMISSION ******************************************************
 
 
 const loginUserButton = document.getElementById("login-user");
@@ -578,9 +999,11 @@ loginUserButton.addEventListener("click", async (e) => {
     return;
   }
 
-  console.log(data);
+  console.log(data);  
   // alert("Logged in");
   window.location.reload();
+  // submitBtn.disabled = false;
+  // userInput.disabled = false;
 });
 
 // **************************************** LOGOUT LOGIC ********************************************************
@@ -677,7 +1100,8 @@ loginButton.onclick = ()=>{
 
    formContainer.classList.toggle("open");
    loginForm.style.display="flex";
-   registerForm.style.display="none";
+   registerForm.style.display ="none";
+   resetForm.style.display="none";
 
    
 }
@@ -729,6 +1153,22 @@ themeButton.addEventListener("click",()=>{
   }
 })
 
+
+ function UTC2Local(utc) {
+   const local = new Date(utc).toLocaleString("en-NZ", {
+     timeZone: "Pacific/Auckland",
+     hour12: true,
+     year: "numeric",
+     month: "2-digit",
+     day: "2-digit",
+     hour: "2-digit",
+     minute: "2-digit",
+     second: "2-digit",
+   });
+
+  //  console.log(local);
+   return local;
+ }
 
 // ********************************************************** MAIN LOGIC **********************************************
 
@@ -801,6 +1241,16 @@ newEntryButton.onclick = ()=>{
 
 //******************************************* WINDOWS ON LOAD *********************************************
 window.onload = async () => { 
+
+const recoveryMode = sessionStorage.getItem("passwordRecovery");
+
+  if (recoveryMode === "true") {
+    formContainer.style.display = "flex";
+    formBlockDiv.style.display = "flex";
+    loginForm.style.display = "none";
+    resetForm.style.display = "flex";
+    formTitle.textContent = "Reset Password";
+  }
   
 const { data: { session },} = await supabaseClient.auth.getSession();
 
@@ -808,10 +1258,14 @@ if (session) {
   console.log("User logged in");
   loginButton.style.display = "none";
   logoutButton.style.display = "block";
+  submitBtn.disabled = false;
+  userInput.disabled = false;
 } else {
   console.log("No session");
   loginButton.style.display = "block";
   logoutButton.style.display = "none";
+  submitBtn.disabled = true;
+  userInput.disabled = true;
   userInput.placeholder = `Welcome! Please create an account and/or login to start. Enter your daily moods or how you'are feeling, this App will extract accurate emotions and log them for you to assess daily and over time.  `;
 }
 
@@ -1173,16 +1627,25 @@ function addToSelect() {
     let newOption = document.createElement("option");
     newOption.value = entry.createdAt;
 
+  //  console.log("Select Bulider created at - ", entry.createdAt);
+   let localTime = UTC2Local(entry.createdAt);
+
+   console.log(localTime);
+    
+
     let [yy,mm,dd] = entry.createdAt.split("T")[0].split("-");
     let time = entry.createdAt.split("T")[1].split(".")[0];
+    // let ampm = Number(entry.createdAt.split("T")[1].slice(0,2))>=12 ? "PM" : "AM";
 
     // console.log("Time is --",time);
 
 
-    newOption.textContent = `${dd} ${monthsShort[Number(mm-1)]} ${yy.slice(-2)} - ${time}`;
+    // newOption.textContent = `${dd} ${monthsShort[Number(mm-1)]} ${yy.slice(-2)} - ${time}`;
+       newOption.textContent = localTime;
     pastEntries.appendChild(newOption);
   });
 }
+
 
 
 // // *********************************** EVENT LISTER ON PAST ENTRIES ******************************************
@@ -1323,7 +1786,10 @@ function renderSelectForEmotion(clickedEmotion, foundEntries) {
     let [yy,mm,dd] = entry.createdAt.split("T")[0].split("-");
     let time = entry.createdAt.split("T")[1].split(".")[0];
 
-    newOption.textContent = `${dd} ${monthsShort[Number(mm-1)]} ${yy.slice(-2)} - ${time}`;
+    let localTime = UTC2Local(entry.createdAt);
+
+    // newOption.textContent = `${dd} ${monthsShort[Number(mm-1)]} ${yy.slice(-2)} - ${time}`;
+    newOption.textContent = localTime;
     clickedEmotionSelect.appendChild(newOption);
   });
 }
@@ -1351,5 +1817,4 @@ function uniqueEmoCount(){
    return {UQ,EC};
 
 }
-
 
