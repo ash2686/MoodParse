@@ -988,9 +988,9 @@ loginUserButton.addEventListener("click", async (e) => {
   const email = document.getElementById("user-login-email").value;
   const password = document.getElementById("user-login-pass").value;
 
-  const rememberMe = document.getElementById("remember-me").checked;
+  // const rememberMe = document.getElementById("remember-me").checked;
 
-  localStorage.setItem("rememberMe", rememberMe);
+  // localStorage.setItem("rememberMe", rememberMe);
 
   const { data, error } =
     await supabaseClient.auth.signInWithPassword({
@@ -1262,7 +1262,7 @@ if (window.location.href.includes("type=recovery")) {
   return;
 }
   
-const { data: { session },} = await supabaseClient.auth.getSession();
+let { data: { session },} = await supabaseClient.auth.getSession();
 
 if (session) {
   console.log("User logged in");
@@ -1277,12 +1277,6 @@ if (session) {
   submitBtn.disabled = true;
   userInput.disabled = true;
   userInput.placeholder = `Welcome! Please create an account and/or login to start. Enter your daily moods or how you'are feeling, this App will extract accurate emotions and log them for you to assess daily and over time.  `;
-}
-
-const rememberMe = localStorage.getItem("rememberMe") === "true";
-
-if(session && !rememberMe) {
-  await supabaseClient.auth.signOut();
 }
 
 
