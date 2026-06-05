@@ -24,7 +24,8 @@ let settings = document.querySelector(".settings");
 let pastLabel = document.querySelector('label[for="past-entries"]');
 
 let themeIcon = document.getElementById("theme-icon");
-const savedTheme = localStorage.getItem("theme");
+const savedTheme = localStorage.getItem("theme") || "light";
+console.log(savedTheme);
 
 let uniqueEmotionsCount;
 let cloudDivs;
@@ -423,10 +424,6 @@ resetForm.addEventListener("submit", async (e) => {
   resetForm.style.display = "none";
   loginForm.style.display = "flex";
 });
-
-
-
-
 
 
 
@@ -850,7 +847,7 @@ pTwoCheck.addEventListener("click",()=>{
     }
 })
 
-// ********************************** FORM SUBMISSION *******************************************
+// ********************************** REGISTRATION FORM SUBMISSION *******************************************
 
 
 let formSubmitted = false;
@@ -1308,7 +1305,7 @@ if (user) {
   numberOfEntriesBlock.appendChild(newP2);
   pastEntryCount.textContent = stats.EC;
 
-        if (savedTheme === "dark") {
+ if(savedTheme === "dark") {
     mainContainer.classList.add("dark");
   }
   renderEmotions(emotionsPool);
