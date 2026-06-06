@@ -11,6 +11,7 @@ let mainContainer = document.querySelector(".main-container");
 const submitBtn = document.getElementById("submit-button");
 let emotionCloud = document.getElementById("cloud");
 let currentCloud = document.querySelector(".current-cloud");
+let entryTimeStamp = document.getElementById("entry-timestamp");
 let numberOfEntriesBlock = document.getElementById("entry-count");
 let pastEntries = document.querySelector("#past-entries");
 let pastEntryCount = document.getElementById("numEntries");
@@ -25,7 +26,7 @@ let pastLabel = document.querySelector('label[for="past-entries"]');
 
 let themeIcon = document.getElementById("theme-icon");
 const savedTheme = localStorage.getItem("theme") || "light";
-console.log(savedTheme);
+// console.log(savedTheme);
 
 let uniqueEmotionsCount;
 let cloudDivs;
@@ -74,6 +75,7 @@ registerBtn.disabled = true;
 forgotLink.addEventListener("click", async () => {
   // loginForm.style.display = "none";
   //  resetForm.style.display = "flex";
+  console.log(window.location.href);
 
    formTitle.textContent = "Reset Password";
 
@@ -84,7 +86,8 @@ forgotLink.addEventListener("click", async () => {
     const { error } = await supabaseClient.auth.resetPasswordForEmail(
       email,
       {
-         redirectTo: "http://127.0.0.1:5501/index.html"
+        //  redirectTo: "http://127.0.0.1:5501/index.html"
+        redirectTo: "https://ash2686.github.io/MoodParse/"
       }
     );
 
@@ -413,6 +416,8 @@ resetForm.addEventListener("submit", async (e) => {
                   alert(error.message);
                 } else {
                   alert("Password updated successfully");
+                  resetForm.style.display = "none";
+                  loginForm.style.display = "flex";
                 }
 
                 sessionStorage.removeItem("passwordRecovery");
@@ -421,8 +426,8 @@ resetForm.addEventListener("submit", async (e) => {
     alert("something went wrong, try again");
   }
 
-  resetForm.style.display = "none";
-  loginForm.style.display = "flex";
+  // resetForm.style.display = "none";
+  // loginForm.style.display = "flex";
 });
 
 
@@ -1119,6 +1124,10 @@ closeFormButton.addEventListener("click",()=>{
 
 //  *********************************** MISC LOGIC *********************************************
 
+
+entryTimeStamp.style.display = "none";
+
+
 settingsGear.onclick =(e)=>{
   e.stopPropagation();
    if(settings.classList.contains("close")){
@@ -1230,7 +1239,10 @@ async function entriesDB(){
 newEntryButton.onclick = ()=>{
   userInput.value = "";
   userInput.focus();
-  currentCloud.innerHTML = "";
+  currentCloud.querySelectorAll(".current-emos").forEach(el => el.remove());
+  entryTimeStamp.style.display = "none";
+
+  // currentCloud.innerHTML = "";
   pastEntries.value ="";
   clickedEmotionSelect.value="";
   selectedEmotionBlock.style.display = "none";
@@ -1623,6 +1635,8 @@ function addToSelect() {
     let newOption = document.createElement("option");
     newOption.value = entry.createdAt;
 
+    // console.log(entry["text"].split(" ").slice(0,4).join(" "));
+
   //  console.log("Select Bulider created at - ", entry.createdAt);
    let localTime = UTC2Local(entry.createdAt);
 
@@ -1637,19 +1651,24 @@ function addToSelect() {
 
 
     // newOption.textContent = `${dd} ${monthsShort[Number(mm-1)]} ${yy.slice(-2)} - ${time}`;
-       newOption.textContent = localTime;
-    pastEntries.appendChild(newOption);
+      
+      //  newOption.textContent = localTime;
+        newOption.textContent = entry["text"].split(" ").slice(0,6).join(" ") + " . . .";
+       pastEntries.appendChild(newOption);
   });
 }
 
+// let currentData = await entriesDB()
+// console.log("Entries are - ",currentData);
 
 
 // // *********************************** EVENT LISTER ON PAST ENTRIES ******************************************
 pastEntries.addEventListener("change", (e) => {
-  currentCloud.innerHTML = "";
+  // currentCloud.innerHTML = "";
+  currentCloud.querySelectorAll(".current-emos").forEach(el => el.remove());
 
   let entry = e.target.value;
-  console.log(entries[0])
+  // console.log(entries[0])
   let delEntry = entries.filter(x=>x.createdAt === entry);
 
 
@@ -1664,13 +1683,19 @@ pastEntries.addEventListener("change", (e) => {
   delButton.textContent = "Delete";
   pastLabel.appendChild(delButton);
 
+
   delButton.addEventListener("click",()=>{
     delPastEntry(delEntry[0].id);
   })
 
   entries.forEach((item) => {
+
     if (item["createdAt"]===entry) {
+      let itemTimeStamp = item["createdAt"];
+      console.log(UTC2Local(itemTimeStamp));
       document.getElementById("entry").value = item.text;
+      entryTimeStamp.style.display = "block";
+      entryTimeStamp.textContent = `Time Stamp - ${UTC2Local(itemTimeStamp)}`;
 
       item.emotions.forEach((emo) => {
         let newSpan = document.createElement("span");
@@ -1796,7 +1821,9 @@ function renderSelectForEmotion(clickedEmotion, foundEntries) {
     let localTime = UTC2Local(entry.createdAt);
 
     // newOption.textContent = `${dd} ${monthsShort[Number(mm-1)]} ${yy.slice(-2)} - ${time}`;
-    newOption.textContent = localTime;
+    // newOption.textContent = localTime;
+    newOption.textContent = `${entry["text"].split(" ").slice(0,3).join(" ") + ".."} - ${localTime}`;
+
     clickedEmotionSelect.appendChild(newOption);
   });
 }
