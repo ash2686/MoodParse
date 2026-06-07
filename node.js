@@ -21,6 +21,7 @@ let selectedEmotionBlock = document.querySelector(".emotion-selected-block");
 let settingsGear = document.querySelector("#gear");
 let settings = document.querySelector(".settings");
 let pastLabel = document.querySelector('label[for="past-entries"]');
+let freshStartButton = document.getElementById("reset");
 
 let themeIcon = document.getElementById("theme-icon");
 const savedTheme = localStorage.getItem("theme") || "light";
@@ -230,6 +231,9 @@ passOne.addEventListener("input",(e)=>{
     if(firstPass.trim().length>0){
     pOneUncheck.style.display ="block";
     passOneGuide.style.display = "flex";
+    }else{
+        passOneBlock.style.outline = "none";
+        passOneGuide.style.display = "none";
     }
 
     if(/[a-z]/.test(firstPass)){
@@ -268,8 +272,9 @@ passOne.addEventListener("input",(e)=>{
       
         passTwo.disabled = false;
         passOneBlock.style.outline = "4px solid green"
-       }else{
-        passOneBlock.style.outline = "4px solid red";
+       }
+       else{
+        // passOneBlock.style.outline = "4px solid red";
         passTwo.disabled = true;
        }
 
@@ -283,6 +288,9 @@ passOne.addEventListener("keydown", (e) => {
    if(firstPass.trim().length>0){
     pOneUncheck.style.display ="block";
     passOneGuide.style.display = "flex";
+    }else{
+        passOneBlock.style.outline = "none";
+        passOneGuide.style.display = "none";
     }
 
     if(/[a-z]/.test(firstPass)){
@@ -321,8 +329,9 @@ passOne.addEventListener("keydown", (e) => {
         
         passTwo.disabled = false;
         passOneBlock.style.outline = "4px solid green";
-       }else{
-        passOneBlock.style.outline = "4px solid red";
+       }
+       else{
+        // passOneBlock.style.outline = "4px solid red";
         passTwo.disabled = true;
        }
 });
@@ -522,6 +531,7 @@ resetPassOne.addEventListener("input",(e)=>{
     resetOneGuide.style.display = "flex";
     }else{
       resetOneBlock.style.outline = "none";
+      resetOneGuide.style.display ="none";
     }
 
     if(/[a-z]/.test(resetPasswordOne)){      
@@ -562,7 +572,7 @@ resetPassOne.addEventListener("input",(e)=>{
         resetPassTwo.disabled = false;
         resetOneBlock.style.outline = "4px solid green"
        }else{
-        resetOneBlock.style.outline = "4px solid red";
+        // resetOneBlock.style.outline = "4px solid red";
         resetPassTwo.disabled = true;
         e.preventDefault();
        }
@@ -748,7 +758,7 @@ resetTwoCheck.addEventListener("click",()=>{
 
 // ###################################################################################################################
 
-// *********************************** gRESET FORM  ***************************************************
+// *********************************** RESET FORM  ***************************************************
 
 
 forgotLink.addEventListener("click", async () => {
@@ -1284,13 +1294,22 @@ if (session) {
   logoutButton.style.display = "block";
   submitBtn.disabled = false;
   userInput.disabled = false;
+  freshStartButton.disabled = false;
+  freshStartButton.style.backgroundColor = "#0d6efd";
+  delAccount.disabled = false;
+  delAccount.style.backgroundColor = "#0d6efd";
 } else {
   console.log("No session");
   loginButton.style.display = "block";
   logoutButton.style.display = "none";
   submitBtn.disabled = true;
   userInput.disabled = true;
+  freshStartButton.disabled = true;
+  freshStartButton.style.backgroundColor = "#6c757d";
+  delAccount.disabled = true;
+  delAccount.style.backgroundColor = "#6c757d";
   userInput.placeholder = `Welcome! Please create an account and/or login to start. Enter your daily moods or how you'are feeling, this App will extract accurate emotions and log them for you to assess daily and over time.  `;
+
 }
 
 
