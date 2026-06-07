@@ -1,5 +1,3 @@
-// import { createClient } from "@supabase/supabase-js";
-
 const supabaseClient = supabase.createClient(
   "https://dnqlpmmrrixhxvngmwsp.supabase.co",
   "sb_publishable_GelgjOJz4pQgtvN3Ki7IgA_SkFIaqyt"
@@ -57,378 +55,6 @@ let backToLoginButton = document.getElementById("back-to-login");
 registerBtn.disabled = true;
 // loginBtn.disabled = true;
 
-// *********************************** RESET FORN***************************************************
-
-
-
-// supabaseClient.auth.onAuthStateChange((event, session) => {
-//   // console.log("EVENT:", event);
-//   // console.log("SESSION:", session);
-
-//   if (event === "PASSWORD_RECOVERY") {
-//     sessionStorage.setItem("passwordRecovery", "true");
-//   }
-// });
-
-// console.log("Windows href is - ",window.location.href);
-
-forgotLink.addEventListener("click", async () => {
-  // loginForm.style.display = "none";
-  //  resetForm.style.display = "flex";
-  console.log(window.location.href);
-
-   formTitle.textContent = "Reset Password";
-
-    const email = prompt("Enter your email address");
-
-    if (!email) return;
-
-    const { error } = await supabaseClient.auth.resetPasswordForEmail(
-      email,
-      {
-        //  redirectTo: "http://127.0.0.1:5501/index.html"
-        redirectTo: "https://ash2686.github.io/MoodParse/"
-      }
-    );
-
-    if (error) {
-      alert(error.message);
-      return;
-    }
-
-    alert("Password reset email sent!");
-  });
-
-  backToLoginButton.addEventListener("click",()=>{
-    resetForm.style.display = "none";
-    loginForm.style.display = "flex";
-    formTitle.textContent = "Login";
-  })
-
-
-// window.addEventListener("load", () => {
-
-// });
-
-
-//  ************************** Reset Passwrod One *************************************
-
-let resetPasswordOne, resetPasswordTwo;
-let resetPassOne = document.getElementById("reset-one");
-let resetPassTwo = document.getElementById("reset-two");
-
-resetPassTwo.disabled = true;
-let resetOneBlock = resetPassOne.parentElement;
-
-let resetOneCheck = document.getElementById("reset-one-check");
-let resetOneUncheck = document.getElementById("reset-one-uncheck");
-let resetOneGuide = document.getElementById("reset-one-guide");
-
-let ResetCheckOne = false;
-let ResetCheckTwo = false;
-let ResetCheckThree = false;
-let ResetCheckFour = false;
-
-resetPassOne.addEventListener("focus",(e)=>{
-   resetPasswordOne = e.target.value;
-  // console.log("FOCUS EVENT IS FIRED!");
-  if(resetPasswordOne.trim().length>0){
-   resetOneGuide.style.display = "flex";
-   resetOneCheck.style.display = "none";
-   resetOneUncheck.style.display = "block";
-   resetPassOne.type ="password";
-}else{
-   resetOneGuide.style.display = "none";
-   resetOneCheck.style.display = "none";
-   resetOneUncheck.style.display ="none";
-   resetOneBlock.style.outline = "none"
-}
-})
-
-resetPassOne.addEventListener("input",(e)=>{
-
-    // console.log(e.target.value);
-    resetPasswordOne = e.target.value;
-    
-    if(resetPasswordOne.trim().length>0){
-    resetOneUncheck.style.display ="block";
-    resetOneGuide.style.display = "flex";
-    }else{
-      resetOneBlock.style.outline = "none";
-    }
-
-    if(/[a-z]/.test(resetPasswordOne)){      
-        document.querySelector(".reset-condition-one").style.color = "green";
-        ResetCheckOne = true;
-        
-    }else{
-        document.querySelector(".reset-condition-one").style.color = "red";
-        ResetCheckOne = false;
-    }
-
-     if(/[A-Z]/.test(resetPasswordOne)){
-        document.querySelector(".reset-condition-two").style.color = "green";
-        ResetCheckTwo = true;
-     }else{
-        document.querySelector(".reset-condition-two").style.color = "red";
-        ResetCheckTwo = false;
-    }
-
-      if(/[0-9]/.test(resetPasswordOne)){
-        document.querySelector(".reset-condition-three").style.color = "green";
-        ResetCheckThree = true;
-     }else{
-        document.querySelector(".reset-condition-three").style.color = "red";
-        ResetCheckThree = false;
-    }
-
-     if(resetPasswordOne.length >= 6){
-        document.querySelector(".reset-condition-four").style.color = "green";
-        ResetCheckFour = true;
-     }else{
-        document.querySelector(".reset-condition-four").style.color = "red";
-        ResetCheckFour =false;
-    }    
-
-       if(ResetCheckOne && ResetCheckTwo && ResetCheckThree && ResetCheckFour){
-      
-        resetPassTwo.disabled = false;
-        resetOneBlock.style.outline = "4px solid green"
-       }else{
-        resetOneBlock.style.outline = "4px solid red";
-        resetPassTwo.disabled = true;
-        e.preventDefault();
-       }
-
-})
-
-resetPassOne.addEventListener("keydown", (e) => {
-  if (e.key === "Backspace" || e.key === "Delete") {
-       resetPasswordOne = e.target.value;
-  }
-    
-    if(resetPasswordOne.trim().length>0){
-    resetOneUncheck.style.display ="block";
-    resetOneGuide.style.display = "flex";
-    }else{
-      resetOneBlock.style.outline = "none";
-    }
-
-    if(/[a-z]/.test(resetPasswordOne)){      
-        document.querySelector(".reset-condition-one").style.color = "green";
-        ResetCheckOne = true;
-        
-    }else{
-        document.querySelector(".reset-condition-one").style.color = "red";
-        ResetCheckOne = false;
-    }
-
-     if(/[A-Z]/.test(resetPasswordOne)){
-        document.querySelector(".reset-condition-two").style.color = "green";
-        ResetCheckTwo = true;
-     }else{
-        document.querySelector(".reset-condition-two").style.color = "red";
-        ResetCheckTwo = false;
-    }
-
-      if(/[0-9]/.test(resetPasswordOne)){
-        document.querySelector(".reset-condition-three").style.color = "green";
-        ResetCheckThree = true;
-     }else{
-        document.querySelector(".reset-condition-three").style.color = "red";
-        ResetCheckThree = false;
-    }
-
-     if(resetPasswordOne.length >= 6){
-        document.querySelector(".reset-condition-four").style.color = "green";
-        ResetCheckFour = true;
-     }else{
-        document.querySelector(".reset-condition-four").style.color = "red";
-        ResetCheckFour =false;
-    }    
-
-       if(ResetCheckOne && ResetCheckTwo && ResetCheckThree && ResetCheckFour){
-      
-        resetPassTwo.disabled = false;
-        resetOneBlock.style.outline = "4px solid green"
-       }else{
-        resetOneBlock.style.outline = "4px solid red";
-        resetPassTwo.disabled = true;
-        // e.preventDefault();
-       }
-});
-
-resetPassOne.addEventListener("change",(e)=>{
- resetPasswordOne = e.target.value;
-
-  if(resetPasswordOne.trim().length>0){
-    resetOneUncheck.style.display ="block";
-    resetOneGuide.style.display = "flex";
-    }else{
-      resetOneBlock.style.outline = "none";
-    }
-
-if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(resetPasswordOne)) || !(resetPasswordOne.length>=6)){
-        resetOneBlock.style.outline = "4px solid red";       
-    }else{
-        resetOneBlock.style.outline = "4px solid green";     
-    }
-
-//  passOneBlock.style.outline = "none";
- resetOneGuide.style.display= "none";
- resetOneUncheck.style.display = "block";
-});
-
-resetOneUncheck.addEventListener("click",()=>{
-      if(resetPassOne.type === "password"){
-        resetPassOne.type = "text";
-        resetOneUncheck.style.display = "none";
-    resetOneCheck.style.display = "block";
-    
-    }else{
-        resetPassOne.type = "password";
-        resetOneUncheck.style.display = "block";
-    resetOneCheck.style.display = "none";
-    }
-});
-
-resetOneCheck.addEventListener("click",()=>{
-    if(resetOne.type === "text"){
-        resetOne.type = "password";
-        resetOneUncheck.style.display = "block";
-         resetOneCheck.style.display ="none";
-         
-    }else{
-        resetOne.type = "text";
-        resetOneUncheck.style.display = "none";
-    resetOneCheck.style.display = "block";
-    resetOneCheck.style.color ="black";
-    }
-})
-
-// **************************************** Reset Password 2 *******************************************
-
-let resetTwoBlock = resetPassTwo.parentElement;
-
-let resetTwoCheck = document.getElementById("reset-two-check");
-let resetTwoUncheck = document.getElementById("reset-two-uncheck");
-
-
-
-resetPassTwo.addEventListener("input",(e)=>{
-  resetTwoUncheck.style.display ="block";
-})
-
-
-resetPassTwo.addEventListener("change", (e) => {
-  resetPasswordTwo = e.target.value;
-  resetTwoUncheck.style.display = "block";
-
-  if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(resetPasswordTwo)) || !(resetPasswordTwo.length>=6)){
-        resetTwoBlock.style.outline = "4px solid red";
-        //  passOneGuide.style.outline = "4px solid red";
-        //  passOneValid = false;
-    }
-});
-
-resetPassTwo.addEventListener("blur",(e)=>{
-  //  passOneGuide.style.display = "none";
-  resetTwoUncheck.style.display = "block";
-  resetTwoCheck.style.display = "none";
-   resetPassTwo.type ="password";
-})
-
-resetPassTwo.addEventListener("focus",(e)=>{
-   resetPasswordTwo = e.target.value;
-
-   if(resetPasswordTwo.trim().length>0){
-  resetTwoCheck.style.display = "none";
-  resetTwoUncheck.style.display = "block";
-   resetPassTwo.type ="password";
-}else{
-  resetTwoCheck.style.display = "none";
-  resetTwoUncheck.style.display = "none"
-}
-})
-
-
-resetTwoUncheck.addEventListener("click",()=>{
-   
-    if(resetPassTwo.type === "password"){
-        resetPassTwo.type = "text";
-         resetTwoUncheck.style.display = "none";
-         resetTwoCheck.style.display = "block";
-    }else{
-        
-      resetPassTwo.type = "password";
-        resetTwoUncheck.style.display = "block";
-        resetTwoCheck.style.display = "none";
-    }
-});
-
-resetTwoCheck.addEventListener("click",()=>{
-    if(resetPassTwo.type === "text"){
-        resetPassTwo.type = "password";
-        resetTwoUncheck.style.display = "block";
-        resetTwoCheck.style.display ="none";
-    }else{
-        resetPassTwo.type = "text";
-         resetTwoUncheck.style.display = "none";
-         resetTwoCheck.style.display = "block";
-         resetTwoCheck.style.color ="black";
-    }
-})
-
-
-
-
-//  ********************************* RESET FORM SUBMIT **************************************
-
-
-resetForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  // let newPass = document.getElementById("new-pass").value;
-  // let confirmPass = document.getElementById("confirm-pass").value;
- console.log("reset fom clicked")
-  let newPass = resetPasswordOne;
-  let confirmPass = resetPasswordTwo;
-
-  console.log(newPass);
-  console.log(confirmPass);   
-
-  // if (!newPass.trim() && !confirmPass.trim() &&  newPass.trim() === newPass.trim() &&  newPass.trim().length >= 6 && confirmPass.trim().length >= 6){
-   if(newPass === confirmPass){
-            const newPassword = newPass;
-
-            const {
-              data: { session },
-              error: sessionError,
-            } = await supabaseClient.auth.getSession();
-
-            console.log("Session:", session);
-            console.log("Session Error:", sessionError);
-
-           const { error } = await supabaseClient.auth.updateUser({
-            password: newPassword,
-            });
-
-                if (error) {
-                  alert(error.message);
-                } else {
-                  alert("Password updated successfully");
-                  resetForm.style.display = "none";
-                  loginForm.style.display = "flex";
-                }
-
-                sessionStorage.removeItem("passwordRecovery");
-  } else {
-    
-    alert("something went wrong, try again");
-  }
-
-  // resetForm.style.display = "none";
-  // loginForm.style.display = "flex";
-});
 
 
 
@@ -749,8 +375,6 @@ passOne.addEventListener("focus",(e)=>{
 
 
 
-// console.log(passTwo)
-
 pOneUncheck.addEventListener("click",()=>{
       if(passOne.type === "password"){
         passOne.type = "text";
@@ -852,6 +476,386 @@ pTwoCheck.addEventListener("click",()=>{
     }
 })
 
+// ************************************* END OF REGISTRATION FORM FIELDS *************************************
+
+//  ************************** Reset Passwrod One *************************************
+
+let resetPasswordOne, resetPasswordTwo;
+let resetPassOne = document.getElementById("reset-one");
+let resetPassTwo = document.getElementById("reset-two");
+
+resetPassTwo.disabled = true;
+let resetOneBlock = resetPassOne.parentElement;
+
+let resetOneCheck = document.getElementById("reset-one-check");
+let resetOneUncheck = document.getElementById("reset-one-uncheck");
+let resetOneGuide = document.getElementById("reset-one-guide");
+
+let ResetCheckOne = false;
+let ResetCheckTwo = false;
+let ResetCheckThree = false;
+let ResetCheckFour = false;
+
+resetPassOne.addEventListener("focus",(e)=>{
+   resetPasswordOne = e.target.value;
+  // console.log("FOCUS EVENT IS FIRED!");
+  if(resetPasswordOne.trim().length>0){
+   resetOneGuide.style.display = "flex";
+   resetOneCheck.style.display = "none";
+   resetOneUncheck.style.display = "block";
+   resetPassOne.type ="password";
+}else{
+   resetOneGuide.style.display = "none";
+   resetOneCheck.style.display = "none";
+   resetOneUncheck.style.display ="none";
+   resetOneBlock.style.outline = "none"
+}
+})
+
+resetPassOne.addEventListener("input",(e)=>{
+
+    // console.log(e.target.value);
+    resetPasswordOne = e.target.value;
+    
+    if(resetPasswordOne.trim().length>0){
+    resetOneUncheck.style.display ="block";
+    resetOneGuide.style.display = "flex";
+    }else{
+      resetOneBlock.style.outline = "none";
+    }
+
+    if(/[a-z]/.test(resetPasswordOne)){      
+        document.querySelector(".reset-condition-one").style.color = "green";
+        ResetCheckOne = true;
+        
+    }else{
+        document.querySelector(".reset-condition-one").style.color = "red";
+        ResetCheckOne = false;
+    }
+
+     if(/[A-Z]/.test(resetPasswordOne)){
+        document.querySelector(".reset-condition-two").style.color = "green";
+        ResetCheckTwo = true;
+     }else{
+        document.querySelector(".reset-condition-two").style.color = "red";
+        ResetCheckTwo = false;
+    }
+
+      if(/[0-9]/.test(resetPasswordOne)){
+        document.querySelector(".reset-condition-three").style.color = "green";
+        ResetCheckThree = true;
+     }else{
+        document.querySelector(".reset-condition-three").style.color = "red";
+        ResetCheckThree = false;
+    }
+
+     if(resetPasswordOne.length >= 6){
+        document.querySelector(".reset-condition-four").style.color = "green";
+        ResetCheckFour = true;
+     }else{
+        document.querySelector(".reset-condition-four").style.color = "red";
+        ResetCheckFour =false;
+    }    
+
+       if(ResetCheckOne && ResetCheckTwo && ResetCheckThree && ResetCheckFour){
+      
+        resetPassTwo.disabled = false;
+        resetOneBlock.style.outline = "4px solid green"
+       }else{
+        resetOneBlock.style.outline = "4px solid red";
+        resetPassTwo.disabled = true;
+        e.preventDefault();
+       }
+
+})
+
+resetPassOne.addEventListener("keydown", (e) => {
+  if (e.key === "Backspace" || e.key === "Delete") {
+       resetPasswordOne = e.target.value;
+  }
+    
+    if(resetPasswordOne.trim().length>0){
+    resetOneUncheck.style.display ="block";
+    resetOneGuide.style.display = "flex";
+    }else{
+      resetOneBlock.style.outline = "none";
+    }
+
+    if(/[a-z]/.test(resetPasswordOne)){      
+        document.querySelector(".reset-condition-one").style.color = "green";
+        ResetCheckOne = true;
+        
+    }else{
+        document.querySelector(".reset-condition-one").style.color = "red";
+        ResetCheckOne = false;
+    }
+
+     if(/[A-Z]/.test(resetPasswordOne)){
+        document.querySelector(".reset-condition-two").style.color = "green";
+        ResetCheckTwo = true;
+     }else{
+        document.querySelector(".reset-condition-two").style.color = "red";
+        ResetCheckTwo = false;
+    }
+
+      if(/[0-9]/.test(resetPasswordOne)){
+        document.querySelector(".reset-condition-three").style.color = "green";
+        ResetCheckThree = true;
+     }else{
+        document.querySelector(".reset-condition-three").style.color = "red";
+        ResetCheckThree = false;
+    }
+
+     if(resetPasswordOne.length >= 6){
+        document.querySelector(".reset-condition-four").style.color = "green";
+        ResetCheckFour = true;
+     }else{
+        document.querySelector(".reset-condition-four").style.color = "red";
+        ResetCheckFour =false;
+    }    
+
+       if(ResetCheckOne && ResetCheckTwo && ResetCheckThree && ResetCheckFour){
+      
+        resetPassTwo.disabled = false;
+        resetOneBlock.style.outline = "4px solid green"
+       }else{
+        resetOneBlock.style.outline = "4px solid red";
+        resetPassTwo.disabled = true;
+        // e.preventDefault();
+       }
+});
+
+resetPassOne.addEventListener("change",(e)=>{
+ resetPasswordOne = e.target.value;
+
+  if(resetPasswordOne.trim().length>0){
+    resetOneUncheck.style.display ="block";
+    resetOneGuide.style.display = "flex";
+    }else{
+      resetOneBlock.style.outline = "none";
+    }
+
+if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(resetPasswordOne)) || !(resetPasswordOne.length>=6)){
+        resetOneBlock.style.outline = "4px solid red";       
+    }else{
+        resetOneBlock.style.outline = "4px solid green";     
+    }
+
+//  passOneBlock.style.outline = "none";
+ resetOneGuide.style.display= "none";
+ resetOneUncheck.style.display = "block";
+});
+
+resetOneUncheck.addEventListener("click",()=>{
+      if(resetPassOne.type === "password"){
+        resetPassOne.type = "text";
+        resetOneUncheck.style.display = "none";
+    resetOneCheck.style.display = "block";
+    
+    }else{
+        resetPassOne.type = "password";
+        resetOneUncheck.style.display = "block";
+    resetOneCheck.style.display = "none";
+    }
+});
+
+resetOneCheck.addEventListener("click",()=>{
+    if(resetOne.type === "text"){
+        resetOne.type = "password";
+        resetOneUncheck.style.display = "block";
+         resetOneCheck.style.display ="none";
+         
+    }else{
+        resetOne.type = "text";
+        resetOneUncheck.style.display = "none";
+    resetOneCheck.style.display = "block";
+    resetOneCheck.style.color ="black";
+    }
+})
+
+// **************************************** Reset Password 2 *******************************************
+
+let resetTwoBlock = resetPassTwo.parentElement;
+
+let resetTwoCheck = document.getElementById("reset-two-check");
+let resetTwoUncheck = document.getElementById("reset-two-uncheck");
+
+
+
+resetPassTwo.addEventListener("input",(e)=>{
+  resetTwoUncheck.style.display ="block";
+})
+
+
+resetPassTwo.addEventListener("change", (e) => {
+  resetPasswordTwo = e.target.value;
+  resetTwoUncheck.style.display = "block";
+
+  if(!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(resetPasswordTwo)) || !(resetPasswordTwo.length>=6)){
+        resetTwoBlock.style.outline = "4px solid red";
+        //  passOneGuide.style.outline = "4px solid red";
+        //  passOneValid = false;
+    }
+});
+
+resetPassTwo.addEventListener("blur",(e)=>{
+  //  passOneGuide.style.display = "none";
+  resetTwoUncheck.style.display = "block";
+  resetTwoCheck.style.display = "none";
+   resetPassTwo.type ="password";
+})
+
+resetPassTwo.addEventListener("focus",(e)=>{
+   resetPasswordTwo = e.target.value;
+
+   if(resetPasswordTwo.trim().length>0){
+  resetTwoCheck.style.display = "none";
+  resetTwoUncheck.style.display = "block";
+   resetPassTwo.type ="password";
+}else{
+  resetTwoCheck.style.display = "none";
+  resetTwoUncheck.style.display = "none"
+}
+})
+
+
+resetTwoUncheck.addEventListener("click",()=>{
+   
+    if(resetPassTwo.type === "password"){
+        resetPassTwo.type = "text";
+         resetTwoUncheck.style.display = "none";
+         resetTwoCheck.style.display = "block";
+    }else{
+        
+      resetPassTwo.type = "password";
+        resetTwoUncheck.style.display = "block";
+        resetTwoCheck.style.display = "none";
+    }
+});
+
+resetTwoCheck.addEventListener("click",()=>{
+    if(resetPassTwo.type === "text"){
+        resetPassTwo.type = "password";
+        resetTwoUncheck.style.display = "block";
+        resetTwoCheck.style.display ="none";
+    }else{
+        resetPassTwo.type = "text";
+         resetTwoUncheck.style.display = "none";
+         resetTwoCheck.style.display = "block";
+         resetTwoCheck.style.color ="black";
+    }
+})
+
+// ###################################################################################################################
+
+// *********************************** RESET FORM  ***************************************************
+
+
+forgotLink.addEventListener("click", async () => {
+  // loginForm.style.display = "none";
+  //  resetForm.style.display = "flex";
+
+   formTitle.textContent = "Reset Password";
+
+    const email = prompt("Enter your email address");
+
+    if (!email) return;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email.trim())) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(
+      email,
+      {
+        //  redirectTo: "http://127.0.0.1:5501/index.html"
+        redirectTo: "https://ash2686.github.io/MoodParse/"
+      }
+    );
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    // console.log(window.location.href);
+
+    alert("If an account exists for that email, a password reset link has been sent!");
+  });
+
+  backToLoginButton.addEventListener("click",()=>{
+    resetForm.style.display = "none";
+    loginForm.style.display = "flex";
+    formTitle.textContent = "Login";
+  })
+
+
+
+//  ********************************* RESET FORM SUBMIT **************************************
+
+
+resetForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  // let newPass = document.getElementById("new-pass").value;
+  // let confirmPass = document.getElementById("confirm-pass").value;
+ console.log("reset fom clicked");
+  let newPass = resetPasswordOne.trim();
+  let confirmPass = resetPasswordTwo.trim();
+  
+  console.log("ENTERING reset password form",window.location.href);
+  
+  if (newPass && newPass === confirmPass){
+  //  if(newPass === confirmPass){
+            const newPassword = newPass;
+
+            const {
+              data: { session },
+              error: sessionError,
+            } = await supabaseClient.auth.getSession();
+
+            console.log("Session:", session);
+            console.log("Session Error:", sessionError);
+
+           const { error } = await supabaseClient.auth.updateUser({
+            password: newPassword,
+            });
+
+                if (error) {
+                  alert(error.message);
+                } else {
+                  alert("Password updated successfully");
+
+                 console.log("Just BEFORE reset successful",window.location.href);
+                }
+
+                sessionStorage.removeItem("passwordRecovery");
+
+                console.log("Hiding reset form");
+                console.log(resetForm);
+
+                console.log("Showing login form");
+                console.log(loginForm);
+
+                resetForm.style.display = "none";
+                loginForm.style.display = "flex";
+
+                console.log("Just AFTER reset successful",window.location.href);
+
+                setTimeout(()=>{
+                  window.location.href = "https://ash2686.github.io/MoodParse/";
+                },20000)
+  } else {
+    
+    alert("something went wrong, try again");
+  }
+
+  // resetForm.style.display = "none";
+  // loginForm.style.display = "flex";
+});
+
+
 // ********************************** REGISTRATION FORM SUBMISSION *******************************************
 
 
@@ -927,12 +931,9 @@ window.location.reload();
 
 })
 
-// let newUser = localStorage.getItem('username') || "";
 
 
-
-
-// *********************************************** LOGIN FORM VALIDATION ************************************************
+// ********************************** LOGIN FORM VALIDATION ************************************************
 
 
 
@@ -980,7 +981,7 @@ loginPassCheck.addEventListener("click",()=>{
 })
 
 
-// *********************************************** LOGIN FORM SUBMISSION ******************************************************
+// ************************************* LOGIN FORM SUBMISSION ******************************************************
 
 
 const loginUserButton = document.getElementById("login-user");
@@ -1076,11 +1077,8 @@ delAccount.addEventListener("click", async () => {
   location.reload();
 });
 
-// ******************************* END OF REGISTRATION FORM VALIDATION *******************************************
 
-
-
-
+// ******************************* LOGIN FORM LINKS  *******************************************
 
 
 
@@ -1120,6 +1118,9 @@ closeFormButton.addEventListener("click",()=>{
 
    formContainer.classList.add("close");
 })
+
+
+
 // // // ************************************** END OF FORM LOGIC **********************************************
 
 //  *********************************** MISC LOGIC *********************************************
