@@ -25,7 +25,16 @@ let freshStartButton = document.getElementById("reset");
 
 let themeIcon = document.getElementById("theme-icon");
 const savedTheme = localStorage.getItem("theme") || "light";
-// console.log(savedTheme);
+
+if (savedTheme === "dark") {
+  mainContainer.classList.add("dark");
+  themeButton.classList.add("slide");
+  themeIcon.src = "./assets/moon.png";
+} else {
+  mainContainer.classList.remove("dark");
+  themeButton.classList.remove("slide");
+  themeIcon.src = "./assets/sun.png";
+}
 
 let uniqueEmotionsCount;
 let cloudDivs;
@@ -1168,18 +1177,34 @@ document.addEventListener("click",()=>{
   settings.classList.remove("open");
 })
 
-themeButton.addEventListener("click",()=>{
-    themeButton.classList.toggle("slide");
-    mainContainer.classList.toggle("dark");
-    if (themeIcon.src.includes("sun.png")) {
-    themeIcon.src = "./assets/moon.png";
-    localStorage.setItem("theme", "light");
+// themeButton.addEventListener("click",()=>{
+//     themeButton.classList.toggle("slide");
+//     mainContainer.classList.toggle("dark");
+//     if (themeIcon.src.includes("sun.png")) {
+//     themeIcon.src = "./assets/moon.png";
+//     localStorage.setItem("theme", "light");
 
-  } else {
-    localStorage.setItem("theme", "dark");
+//   } else {
+//     localStorage.setItem("theme", "dark");
+//     themeIcon.src = "./assets/sun.png";
+//   }
+// })
+
+themeButton.addEventListener("click", () => {
+  const isDark = mainContainer.classList.contains("dark");
+
+  if (isDark) {
+    mainContainer.classList.remove("dark");
     themeIcon.src = "./assets/sun.png";
+    localStorage.setItem("theme", "light");
+    themeButton.classList.remove("slide");
+  } else {
+    mainContainer.classList.add("dark");
+    themeIcon.src = "./assets/moon.png";
+    localStorage.setItem("theme", "dark");
+    themeButton.classList.add("slide");
   }
-})
+});
 
 
  function UTC2Local(utc) {
