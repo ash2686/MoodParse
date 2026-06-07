@@ -752,13 +752,7 @@ resetTwoCheck.addEventListener("click",()=>{
 
 
 forgotLink.addEventListener("click", async () => {
-  // loginForm.style.display = "none";
-  //  resetForm.style.display = "flex";
-
-  loginForm.style.display = "none";
-  resetForm.style.display = "flex";
-
-   formTitle.textContent = "Reset Password";
+ 
 
     const email = prompt("Enter your email address");
 
@@ -769,6 +763,14 @@ forgotLink.addEventListener("click", async () => {
     if (!emailRegex.test(email.trim())) {
       alert("Please enter a valid email address");
       return;
+    }
+     
+    if(email){
+          document.getElementById("reset-email").value = email;
+          document.getElementById("reset-email").style.disabled = true;
+            
+          alert("An email with reset link has been sent, Please click your email to reset password!");
+          formContainer.classList.add("close");
     }
 
     const { error } = await supabaseClient.auth.resetPasswordForEmail(
