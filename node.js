@@ -755,6 +755,9 @@ forgotLink.addEventListener("click", async () => {
   // loginForm.style.display = "none";
   //  resetForm.style.display = "flex";
 
+  loginForm.style.display = "none";
+  resetForm.style.display = "flex";
+
    formTitle.textContent = "Reset Password";
 
     const email = prompt("Enter your email address");
@@ -843,17 +846,16 @@ resetForm.addEventListener("submit", async (e) => {
 
                 console.log("Just AFTER reset successful",window.location.href);
 
-                setTimeout(()=>{
-                  window.location.href = "https://ash2686.github.io/MoodParse/";
-                },20000)
+                // setTimeout(()=>{
+                //   window.location.href = "https://ash2686.github.io/MoodParse/";
+                // },20000)
   } else {
     
     alert("something went wrong, try again");
   }
 
-  // resetForm.style.display = "none";
-  // loginForm.style.display = "flex";
 });
+
 
 
 // ********************************** REGISTRATION FORM SUBMISSION *******************************************
