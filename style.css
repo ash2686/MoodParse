@@ -84,11 +84,12 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--fs-blue);
+    /* border: 1px solid var(--fs-blue); */
     justify-content: center;
     align-items: center;
     display: none;
-    background-color: var(--text);
+    /* background-color: var(--text); */
+    background-color: var(--fs-green);
     color: var(--bg);
 
     /* padding:1rem 0; */
@@ -107,7 +108,7 @@
     /* text-decoration: underline; */
     font-style: italic;
     font-size: .8rem;
-    color: var(--fs-blue);
+    color: var(--bg);
     /* cursor: pointer; */
 }
 
@@ -898,7 +899,7 @@ border-radius: 5px;
 .main-container #cloud{
     width: 100%;
     min-height: 40%;
-    border-top: 1px solid var(--text);
+    /* border-top: 1px solid var(--text); */
     /* background-color: var(--fs-blue); */
     padding: 1rem;
     padding-top: 3rem;
@@ -914,12 +915,12 @@ border-radius: 5px;
     width: 30%;
     height: 10%;
     /* border: 1px solid black; */
-    background-color: var(--fs-blue);
+    background-color: var(--fs-gray);
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     border-radius: 5px;
-    color: var(--text);
+    color: var(--bg);
     font-weight: bolder;
     /* margin-bottom: 1rem; */
 }

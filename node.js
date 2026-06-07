@@ -927,7 +927,7 @@ if (error) {
 //   localStorage.setItem('username', name);
 // }
 console.log(data);
-alert("Account created");
+alert("Account created! Please CONFIRM your email first before logging in!");
 registerForm.reset();
   
 document.getElementsByClassName("welcome-block")[0].style.display = "flex";
