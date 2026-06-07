@@ -911,6 +911,7 @@ const { data, error } = await supabaseClient.auth.signUp({
   email,
   password,
   options: {
+     emailRedirectTo: "https://ash2686.github.io/MoodParse/",
     data: {
       display_name: name
     }
