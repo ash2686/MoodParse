@@ -748,7 +748,7 @@ resetTwoCheck.addEventListener("click",()=>{
 
 // ###################################################################################################################
 
-// *********************************** RESET FORM  ***************************************************
+// *********************************** gRESET FORM  ***************************************************
 
 
 forgotLink.addEventListener("click", async () => {
@@ -766,10 +766,9 @@ forgotLink.addEventListener("click", async () => {
     }
      
     if(email){
-          document.getElementById("reset-email").value = email;
-          document.getElementById("reset-email").style.disabled = true;
+          // document.getElementById("reset-email").value = email;
+          // document.getElementById("reset-email").style.disabled = true;
             
-          alert("An email with reset link has been sent, Please click your email to reset password!");
           formContainer.classList.add("close");
     }
 
@@ -842,6 +841,8 @@ resetForm.addEventListener("submit", async (e) => {
 
                 console.log("Showing login form");
                 console.log(loginForm);
+
+                formTitle.textContent = "Login";
 
                 resetForm.style.display = "none";
                 loginForm.style.display = "flex";
@@ -1578,7 +1579,7 @@ window.resetApp = async function () {
   const { data: { user },} = await supabaseClient.auth.getUser();
 
   const confirmed = confirm(
-    "Delete ALL entries and emotions from database?"
+    "Delete ALL Data? for a FRESH start?"
   );
 
   if (!confirmed) return;
