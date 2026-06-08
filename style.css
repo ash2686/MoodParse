@@ -784,6 +784,17 @@ border-radius: 5px;
     /* background-color: red; */
 }
 
+#contact-form .form-block label{
+    align-items: flex-start;
+    justify-content: flex-start;
+    /* color: red; */
+    font-weight: bolder;
+    /* border:1px solid black; */
+    width: 100%;
+    padding-left: 2.2rem;
+    /* font-size: 1.1rem; */
+}
+
 #contact-form .form-block #contact-message{
     resize: none;
     width: 90%;
@@ -808,7 +819,7 @@ border-radius: 5px;
     height: 60%;
     border-radius: 10px;
     cursor: pointer;
-
+    font-weight: bolder;
 }
 
 
@@ -1007,7 +1018,7 @@ border-radius: 5px;
     /* border-top: 1px solid var(--text); */
     /* background-color: var(--fs-blue); */
     padding: 1rem;
-    padding-top: 3rem;
+    padding-top: 2.5rem;
     position: relative;
     overflow-y: auto;
 }
