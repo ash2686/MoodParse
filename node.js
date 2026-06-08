@@ -20,6 +20,7 @@ let clickedEmotionSelect = document.querySelector("#clicked-emotion");
 let selectedEmotionBlock = document.querySelector(".emotion-selected-block");
 let settingsGear = document.querySelector("#gear");
 let settings = document.querySelector(".settings");
+let contactMeButton = document.getElementById("contact-me");
 let pastLabel = document.querySelector('label[for="past-entries"]');
 let freshStartButton = document.getElementById("reset");
 
@@ -1177,18 +1178,6 @@ document.addEventListener("click",()=>{
   settings.classList.remove("open");
 })
 
-// themeButton.addEventListener("click",()=>{
-//     themeButton.classList.toggle("slide");
-//     mainContainer.classList.toggle("dark");
-//     if (themeIcon.src.includes("sun.png")) {
-//     themeIcon.src = "./assets/moon.png";
-//     localStorage.setItem("theme", "light");
-
-//   } else {
-//     localStorage.setItem("theme", "dark");
-//     themeIcon.src = "./assets/sun.png";
-//   }
-// })
 
 themeButton.addEventListener("click", () => {
   const isDark = mainContainer.classList.contains("dark");
@@ -1203,6 +1192,67 @@ themeButton.addEventListener("click", () => {
     themeIcon.src = "./assets/moon.png";
     localStorage.setItem("theme", "dark");
     themeButton.classList.add("slide");
+  }
+});
+
+let contactFormBlock = document.querySelector(".contact-form-block");
+let closeContact = document.getElementById("close-contact");
+let sendMessageButton = document.getElementById("send-message");
+let contactForm = document.getElementById("contact-form");
+const status = document.getElementById("status");
+
+
+
+  contactMeButton.addEventListener("click",()=>{
+    contactFormBlock.style.display = "flex";
+    sendMessageButton.style.disabled = false;
+    status.textContent = "";
+  })
+
+  closeContact.onclick = ()=>{
+    contactFormBlock.style.display = "none";
+    status.textContent = "";
+}
+
+contactForm.addEventListener("submit",async (e)=>{
+  e.preventDefault();
+
+    const data = {
+        access_key: "aff38752-17b8-430d-9bf7-a3556050097f",
+        subject: "MoodParse Support Request",
+        name: document.getElementById("contact-name").value,
+        email: document.getElementById("contact-email").value,
+        message: document.getElementById("contact-message").value
+    };
+  
+    if(data.name && data.email && data.message){
+    const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }
+    );
+  
+
+    const result = await response.json();
+
+    if (result.success) {
+        status.textContent = "Message sent successfully.";
+        status.style.color = "#198754";
+        contactForm.reset();
+        sendMessageButton.style.disabled = true;
+    } else {
+        status.textContent = "Failed to send message.";
+        status.style.color = "#dc3545";
+
+    }
+
+  }else{
+    alert("Incomplete Form!");
   }
 });
 

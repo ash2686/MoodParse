@@ -90,7 +90,7 @@
     display: none;
     /* background-color: var(--text); */
     background-color: var(--fs-green);
-    color: var(--bg);
+    color: var(--text);
 
     /* padding:1rem 0; */
 }
@@ -99,7 +99,7 @@
     margin: 0;
     padding: 0;
     font-size: .6rem;
-    color: var(--bg);
+    /* color: var(--bg); */
     font-weight: bolder;
 }
 
@@ -686,7 +686,7 @@ border-radius: 5px;
     color: var(--text);
 }
 
-.settings-block .settings .reset-button-block, .settings-block .settings .delete-account{
+.settings-block .settings .reset-button-block, .settings-block .settings .delete-account,.contact-me-block{
     width: 100%;
     height: 3rem;
     border-radius: 5px;
@@ -696,7 +696,7 @@ border-radius: 5px;
 
 
 
-#reset, #delete-account{
+#reset, #delete-account,#contact-me{
     width: 100%;;
     height: 100%;
     box-shadow: none;
@@ -711,6 +711,106 @@ border-radius: 5px;
     color: var(--bg-white);
     cursor: pointer;
 }
+
+/* ************************** CONTACT FORM ****************************************** */
+
+
+.main-container .contact-form-block{
+    width: 40%;
+    height: 80%;
+    /* background-color: var(--fs-red); */
+    background-color: var(--bg);
+    border-radius: 10px;
+    z-index: 2900;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 2rem;
+    border: 1px solid var(--text);
+}
+
+#close-contact{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    cursor: pointer;
+}
+
+.contact-form-block .contact-form-title{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+#status{
+    height: 5%;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:var(--fs-blue)
+}
+
+.contact-form-block #contact-form{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--text);
+    border-radius: 10px;
+    /* background-color: #198754; */
+}
+
+#contact-form .form-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #0d6efd; */
+    width: 100%;
+    height: 25%;
+    /* background-color: red; */
+}
+
+#contact-form .form-block #contact-message{
+    resize: none;
+    width: 90%;
+    height: 80%;
+    border: 1px solid var(--text);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+#contact-form .form-block #contact-email, #contact-form .form-block #contact-name{
+    width: 90%;
+    height: 40%;
+    border: 1px solid var(--text);
+    border-radius: 5px;
+    padding: 0 1rem;
+
+}
+
+#contact-form .form-block #send-message{
+    border: 1px solid var(--text);
+    width: 90%;
+    height: 60%;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
 
 .main-container .past-entries-block{
     position: absolute;
