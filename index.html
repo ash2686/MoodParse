@@ -9,14 +9,37 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://kit.fontawesome.com/807d2e2951.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    <title>MoodParse</title>
+    <title>MoodParse-V1</title>
 </head>
 <body>
 
-    <div class="main-container">
+<div class="main-container">
+
+<!-- ************************************ AI response Window *************************************************************** -->
+
+<div class="ai-background">
+    <div class="ai-response-container">
+        
+        <i id="close-ai-response" class="fa-solid fa-square-xmark"></i>
+
+         <div class="your-entry">
+            <h2>Your Wrote</h2>
+            
+            <p id="your-entry-text">
+                <!-- <i class="fa-solid fa-quote-left quotes"></i>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore temporibus necessitatibus excepturi fuga, accusamus eius dolorem nesciunt quidem itaque molestiae adipisci illum tenetur explicabo earum sunt nulla eligendi atque rerum hic perferendis error. Dolorem iusto at, iste omnis libero et cum veritatis eveniet impedit dignissimos porro corporis recusandae dolores quibusdam?<i class="fa-solid fa-quote-right quotes"></i> -->
+            </p>
+        </div>
+         <hr>
+         <div class="ai-response-block">
+            <h2>AI Response</h2>
+            <p id="ai-response-text"></p>
+
+        </div>
+    </div>
+</div>
 
 
-            <!-- ***************************************** CONTACT ME FORM ************************************************************* -->
+<!-- ***************************************** CONTACT ME FORM ************************************************************* -->
 
                <div class="contact-form-block">
                     <i id="close-contact" class="fa-solid fa-square-xmark"></i>
@@ -26,7 +49,7 @@
                          <div class="form-block">
                             <label for="contact-name">Full Name</label>
                             <input type="text" id="contact-name" name="contact-name">
-                        </div>
+                        </div>a
                          <div class="form-block">
                             <label for="contact-email">Email</label>
                             <input type="email" id="contact-email" name="contact-email">
@@ -43,8 +66,7 @@
                     </form>
                         <p id="status"></p>
                </div>
-        <!-- <button id="sign-up" class="sign-in" type="button">Sign Up</button> -->
-         <!-- <img id="gear" src="/assests/gear.svg" alt="Gear SVG"> -->
+        
         <div class="settings-block">
             <i id="gear" class="bi bi-gear-fill"></i>
             <div class="settings">
@@ -276,29 +298,23 @@
             <div id="entry-timestamp">11th May 2024</div>
         </div>
 
-       
 
-        <!-- <div class="entries-block">
-            
-        </div> -->
 
-        <div class="main-block">
-                <form action="#" id="extractor-form">
-                    <textarea name="entry" id="entry" placeholder="Type in an entry about your day, how you are feeling... This app will extract your attached emotions accurately and log them for you to analyze daily and over time..."></textarea>
-
-                    <button id ="submit-button" type="submit">Extract</button>
-                </form>
-        </div>
-
-        <div class="emotion-selected-block">
-            <div class="clicked-select-block">
-                <label id="selected-emo-name" for="clicked-emotion">Click an Emotion for its Entries</label>
-                <select name="clicked-emotion" id="clicked-emotion">
-                    <option value="" hidden>Choose</option>
-                </select>
-            </div>
-
-        </div>
+<div class="main-block">
+        <form action="#" id="extractor-form">
+            <textarea name="entry" id="entry" placeholder="Type in an entry about your day, how you are feeling... This app will extract your attached emotions accurately and log them for you to analyze daily and over time..."></textarea>
+            <button id ="submit-button" type="submit">Extract</button>
+            <button id ="ai-response" type="button">AI Response</button>
+        </form>
+</div>
+<div class="emotion-selected-block">
+    <div class="clicked-select-block">
+        <label id="selected-emo-name" for="clicked-emotion">Click an Emotion for its Entries</label>
+        <select name="clicked-emotion" id="clicked-emotion">
+            <option value="" hidden>Choose</option>
+        </select>
+    </div>
+</div>
 
 
        
