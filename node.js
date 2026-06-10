@@ -1800,6 +1800,8 @@ async function delPastEntry(id) {
 
   renderEmotions(emotionsPool);
   addToSelect();
+  submitBtn.style.display = "block";
+  aiResponseButton.style.display = "none";
   alert("Entry Deleted!");
 }
 
