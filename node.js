@@ -13,7 +13,7 @@ let entryTimeStamp = document.getElementById("entry-timestamp");
 let numberOfEntriesBlock = document.getElementById("entry-count");
 let pastEntries = document.querySelector("#past-entries");
 let pastEntryCount = document.getElementById("numEntries");
-let delButton;
+let delButton = document.createElement("button");
 let newEntryButton = document.getElementById("new-entry-button");
 let userInput = document.querySelector("#entry");
 
@@ -1271,8 +1271,8 @@ newEntryButton.onclick = () => {
   submitBtn.disabled = false;
   submitBtn.style.backgroundColor = "#198754";
   submitBtn.textContent = "Extract";
-  delButton.style.display = "none";
   renderEmotions(emotionsPool);
+  delButton.style.display = "none";
 };
 
 //******************************************* WINDOWS ON LOAD *********************************************
@@ -1396,7 +1396,7 @@ submitBtn.addEventListener("click", async (e) => {
 
       const data = await response.json();
 
-      console.log("New Data is - ", data);
+      // console.log("New Data is - ", data);
 
       if (!response.ok) {
         console.error("Server error:", data);
@@ -1425,14 +1425,14 @@ submitBtn.addEventListener("click", async (e) => {
   const userData = await analyzeTextEmotion(text);
   let reflection = userData.reflection || "";
 
-  console.log("FULL RESPONSE:");
-  console.log(userData);
+  // console.log("FULL RESPONSE:");
+  // console.log(userData);
 
-  console.log("EMOTIONS:");
-  console.log(userData.emotions);
+  // console.log("EMOTIONS:");
+  // console.log(userData.emotions);
 
-  console.log("REFLECTION:");
-  console.log(userData.reflection);
+  // console.log("REFLECTION:");
+  // console.log(userData.reflection);
 
   // return;
 
@@ -1440,7 +1440,7 @@ submitBtn.addEventListener("click", async (e) => {
   let emotions = userData.emotions || [];
   // let reflection = userData.reflection || "";
 
-  console.log(reflection);
+  // console.log(reflection);
 
   const { data: entry, error } = await supabaseClient
     .from("entries")
@@ -1551,6 +1551,7 @@ function uniqueEmotions(arr) {
 
 function renderEmotions(x) {
   let cloudCells = emotionCloud.querySelectorAll(".emotion-item");
+  console.log("Current Emotions are - ",currentEmotions);
 
   if (cloudCells) {
     cloudCells.forEach((item) => {
@@ -1730,11 +1731,12 @@ pastEntries.addEventListener("change", (e) => {
   submitBtn.style.backgroundColor = "grey";
   submitBtn.textContent = "Extract(disabled)";
 
-  delButton = document.createElement("button");
+  
   delButton.id = "del-past-entry";
   delButton.type = "button";
   delButton.textContent = "Delete";
   pastLabel.appendChild(delButton);
+  delButton.style.display = "block";
 
   delButton.addEventListener("click", () => {
     delPastEntry(delEntry[0].id);
@@ -1745,7 +1747,7 @@ pastEntries.addEventListener("change", (e) => {
       let itemTimeStamp = item["createdAt"];
       // console.log(UTC2Local(itemTimeStamp));
       document.getElementById("entry").value = item.text;
-      console.log("From Past entries", item.reflection);
+      // console.log("From Past entries", item.reflection);
 
       if (item.reflection !== null) {
         responseAI(item.text, item["reflection"]);
