@@ -34,6 +34,13 @@ let aiText = document.getElementById("ai-response-text");
 let themeIcon = document.getElementById("theme-icon");
 const savedTheme = localStorage.getItem("theme") || "light";
 
+// let keyDown = new Audio("./assets/key1.mp3");
+
+// userInput.addEventListener("keydown",()=>{
+//   keyDown.currentTime = 0;
+//   keyDown.play();
+// })
+
 if (savedTheme === "dark") {
   mainContainer.classList.add("dark");
   themeButton.classList.add("slide");
@@ -1520,9 +1527,12 @@ function responseAI(text, reflection) {
     yourEntryText.innerHTML = `<i class="fa-solid fa-quote-left quotes"></i>${currentText}<i class="fa-solid fa-quote-right quotes"></i>`;
     aiText.textContent = "";
     let i = 0;
+    // let keyStoke = new Audio("./assets/key1.mp3")
 
     typingInterval = setInterval(() => {
       if (i < currentReflection.length) {
+        // keyStoke.currentTime = 0;
+        // keyStoke.play();
         aiText.textContent += currentReflection[i];
         i++;
       } else {
@@ -1551,7 +1561,7 @@ function uniqueEmotions(arr) {
 
 function renderEmotions(x) {
   let cloudCells = emotionCloud.querySelectorAll(".emotion-item");
-  console.log("Current Emotions are - ",currentEmotions);
+  // console.log("Current Emotions are - ",currentEmotions);
 
   if (cloudCells) {
     cloudCells.forEach((item) => {
