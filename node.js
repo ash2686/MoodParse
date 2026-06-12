@@ -7,6 +7,7 @@ let themeButton = document.querySelector(".theme-button-block");
 let mainContainer = document.querySelector(".main-container");
 const submitBtn = document.getElementById("submit-button");
 let aiResponseButton = document.getElementById("ai-response");
+let aiWrapper = document.querySelector(".wrapper");
 let emotionCloud = document.getElementById("cloud");
 let currentCloud = document.querySelector(".current-cloud");
 let entryTimeStamp = document.getElementById("entry-timestamp");
@@ -1270,6 +1271,7 @@ newEntryButton.onclick = () => {
 
   submitBtn.style.display = "block";
   aiResponseButton.style.display = "none";
+  aiWrapper.style.display = "none";
 
   // currentCloud.innerHTML = "";
   pastEntries.value = "";
@@ -1515,6 +1517,7 @@ closeAI.onclick = () => {
 function responseAI(text, reflection) {
   submitBtn.style.display = "none";
   aiResponseButton.style.display = "block";
+  aiWrapper.style.display= "block";
 
   currentText = text;
   currentReflection = reflection;
@@ -1814,6 +1817,7 @@ async function delPastEntry(id) {
   addToSelect();
   submitBtn.style.display = "block";
   aiResponseButton.style.display = "none";
+  aiWrapper.style.display = "none";
   alert("Entry Deleted!");
 }
 
