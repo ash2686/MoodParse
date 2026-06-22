@@ -956,8 +956,9 @@ border-radius: 5px;
     font-size: .8rem;
     border: 1px solid black;
     color: var(--bg-white);
-    padding: .5rem 0 !important;
+    /* padding: .5rem 0 !important; */
     cursor: pointer;
+    
 }
 
 .main-container .current-cloud{
@@ -965,13 +966,30 @@ border-radius: 5px;
     left: 0;
     width: 23%;
     height: 25%;
-    top: 35%;
+    top: 30%;
+    padding: 1rem;
+    /* background-color: red; */
+}
+
+.main-container .others-cloud{
+ position: absolute;
+    right: 0;
+    width: 23%;
+    height: 25%;
+    top: 30%;
     padding: 1rem;
     /* background-color: red; */
 }
 
 #entry-timestamp{
     position: absolute;
+    font-weight: bolder;
+    font-size: .8rem;
+    top: -15%
+}
+
+#others-entry-timestamp{
+     position: absolute;
     font-weight: bolder;
     font-size: .8rem;
     top: -15%
@@ -1053,8 +1071,8 @@ border-radius: 5px;
 }
 
 #ai-response{
-    background-color: var(--bg) !important;
-    color: var(--text);
+    background-color: var(--text) !important;
+    color: var(--bg);
       width: 100%;
     height: 100%;
     border: none;
@@ -1188,6 +1206,16 @@ border-radius: 5px;
 
 .current-emos{
     border: 1px solid var(--text);
+    padding: .4rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: .2rem
+}
+
+.others-emos{
+      border: 1px solid var(--text);
     padding: .4rem;
     display: inline-flex;
     justify-content: center;

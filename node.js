@@ -10,7 +10,9 @@ let aiResponseButton = document.getElementById("ai-response");
 let aiWrapper = document.querySelector(".wrapper");
 let emotionCloud = document.getElementById("cloud");
 let currentCloud = document.querySelector(".current-cloud");
+let othersCloud = document.querySelector(".others-cloud");
 let entryTimeStamp = document.getElementById("entry-timestamp");
+let othersTimeStamp = document.getElementById("others-entry-timestamp");
 let numberOfEntriesBlock = document.getElementById("entry-count");
 let pastEntries = document.querySelector("#past-entries");
 let pastEntryCount = document.getElementById("numEntries");
@@ -1098,6 +1100,7 @@ closeFormButton.addEventListener("click", () => {
 //  *********************************** MISC LOGIC *********************************************
 
 entryTimeStamp.style.display = "none";
+othersTimeStamp.style.display = "none";
 
 settingsGear.onclick = (e) => {
   e.stopPropagation();
@@ -1267,13 +1270,14 @@ newEntryButton.onclick = () => {
   userInput.value = "";
   userInput.focus();
   currentCloud.querySelectorAll(".current-emos").forEach((el) => el.remove());
+  othersCloud.querySelectorAll(".others-emos").forEach((el) => el.remove());
   entryTimeStamp.style.display = "none";
+  othersTimeStamp.style.display = "none"
 
   submitBtn.style.display = "block";
   aiResponseButton.style.display = "none";
   aiWrapper.style.display = "none";
 
-  // currentCloud.innerHTML = "";
   pastEntries.value = "";
   clickedEmotionSelect.value = "";
   selectedEmotionBlock.style.display = "none";
@@ -1732,7 +1736,6 @@ function addToSelect() {
 
 // // *********************************** EVENT LISTER ON PAST ENTRIES ******************************************
 pastEntries.addEventListener("change", (e) => {
-  // currentCloud.innerHTML = "";
   currentCloud.querySelectorAll(".current-emos").forEach((el) => el.remove());
   aiText.textContent = "";
 
@@ -1885,6 +1888,8 @@ function renderSelectForEmotion(clickedEmotion, foundEntries) {
   clickedEmotionSelect.appendChild(firstOp);
 
   foundEntries.forEach((entry) => {
+
+    othersCloud.innerHTML = "";
     let newOption = document.createElement("option");
     newOption.value = entry.createdAt;
     let [yy, mm, dd] = entry.createdAt.split("T")[0].split("-");
@@ -1904,6 +1909,9 @@ function renderSelectForEmotion(clickedEmotion, foundEntries) {
 clickedEmotionSelect.addEventListener("change", (e) => {
   aiText.textContent = "";
 
+  othersCloud.querySelectorAll(".others-emos").forEach((el) => el.remove());
+
+
   let ctx = e.target.value;
   console.log("CTX", ctx);
   submitBtn.disabled = true;
@@ -1914,8 +1922,20 @@ clickedEmotionSelect.addEventListener("change", (e) => {
       if (entry.reflection !== null) {
         responseAI(entry.text, entry.reflection);
       }
-
+       
+      let itemTimeStamp = entry.createdAt;
+      othersTimeStamp.style.display = "block";
+      othersTimeStamp.textContent = `Time Stamp - ${UTC2Local(itemTimeStamp)}`;
       userInput.value = entry["text"];
+
+       entry.emotions.forEach((emo) => {
+        let newSpan = document.createElement("span");
+        newSpan.classList.add("others-emos");
+
+        newSpan.textContent = emo;
+
+        othersCloud.appendChild(newSpan);
+      });
     }
   });
 });
