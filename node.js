@@ -1288,6 +1288,7 @@ newEntryButton.onclick = () => {
   delButton.style.display = "none";
 };
 
+
 //******************************************* WINDOWS ON LOAD *********************************************
 window.onload = async () => {
   if (window.location.href.includes("type=recovery")) {
@@ -1790,7 +1791,7 @@ async function delPastEntry(id) {
   let res = confirm("Are you sure you want to delete this entry!");
   if (!res) {
     return;
-  }
+  }else{
   delButton.style.display = "none";
 
   await supabaseClient.from("entries").delete().eq("id", id);
@@ -1818,10 +1819,19 @@ async function delPastEntry(id) {
 
   renderEmotions(emotionsPool);
   addToSelect();
+  
+  alert("Entry Deleted!");
+
+  userInput.value = "";
+  userInput.focus();
   submitBtn.style.display = "block";
   aiResponseButton.style.display = "none";
   aiWrapper.style.display = "none";
-  alert("Entry Deleted!");
+  submitBtn.disabled = false;
+  submitBtn.style.backgroundColor = "#198754";
+  submitBtn.textContent = "Extract";
+  
+}
 }
 
 function getCloudDivs() {
