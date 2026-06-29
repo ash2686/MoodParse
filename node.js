@@ -1830,6 +1830,8 @@ async function delPastEntry(id) {
   submitBtn.disabled = false;
   submitBtn.style.backgroundColor = "#198754";
   submitBtn.textContent = "Extract";
+
+  location.reload();
   
 }
 }
